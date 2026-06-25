@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-900 text-cream font-sans antialiased;
+  /* Trava estouro horizontal (ex.: faixas em marquee) sem criar contêiner de
+     rolagem — evita que o navegador in-app do Instagram renderize com zoom-out.
+     `clip` (não `hidden`) p/ não interferir no nav fixo nem nas âncoras. */
+  overflow-x: clip;
+}
+
+/* Tipografia de display condensada */
+.font-display {
+  letter-spacing: 0.01em;
+}
+
+/* Scrollbar discreta no tema escuro */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0b0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #26262b;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e30613;
+}
+
+/* Seleção de texto na cor da marca */
+::selection {
+  background: #e30613;
+  color: #fff;
+}
+
+/* Foco visível acessível (teclado) na cor da marca */
+:focus-visible {
+  outline: 2px solid #e30613;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  /* Container padrão */
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Rótulo de seção (kicker) */
+  .kicker {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-blood;
+  }
+  .kicker::before {
+    content: "";
+    @apply h-px w-8 bg-blood;
+  }
+
+  /* Título de seção grande condensado */
+  .section-title {
+    @apply font-display text-4xl uppercase leading-[0.95] sm:text-5xl md:text-6xl lg:text-7xl;
+  }
+
+  /* Título do hero (maior que os de seção) */
+  .hero-title {
+    @apply max-w-full font-display text-4xl uppercase leading-[0.92] sm:text-6xl md:text-7xl lg:text-8xl;
+  }
+
+  /* <b> dentro de títulos vira destaque vermelho */
+  .section-title b,
+  .hero-title b {
+    @apply font-display text-blood not-italic;
+  }
+
+  /* Card base */
+  .card {
+    @apply rounded-2xl border border-ink-500/60 bg-ink-700/80 backdrop-blur-sm;
+  }
+
+  /* Linha de divisão sutil */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-ink-500 to-transparent;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* Textura de grão / vinheta para clima premium escuro */
+  .vignette {
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(227, 6, 19, 0.12), transparent 60%),
+      radial-gradient(100% 100% at 50% 100%, rgba(0, 0, 0, 0.6), transparent 70%);
+  }
+
+  /* Texto contornado (usado em números grandes do método) */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(244, 238, 220, 0.18);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 0 1px rgba(227, 6, 19, 0.4), 0 10px 40px -10px rgba(227, 6, 19, 0.55);
+  }
+
+  /* Manchas de luz (aurora) reaproveitáveis no fundo escuro */
+  .aurora-blob {
+    @apply pointer-events-none absolute rounded-full blur-[120px];
+  }
+
+  /* Textura de grade pontilhada sutil (desenhada sobre a cor sólida da seção) */
+  .bg-grid {
+    background-image: radial-gradient(rgba(244, 238, 220, 0.045) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: -1px -1px;
+  }
+  /* Grade com desvanecimento radial nas bordas (mais cinematográfico) */
+  .bg-grid-fade {
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 50%, #000 35%, transparent 80%);
+    mask-image: radial-gradient(120% 90% at 50% 50%, #000 35%, transparent 80%);
+  }
+
+  /* Barra de rolagem horizontal "limpa" para a galeria com drag */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .drag-strip {
+    cursor: grab;
+    scroll-snap-type: x mandatory;
+  }
+  .drag-strip.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+  .drag-strip > * {
+    scroll-snap-align: center;
+  }
+
+  /* Grão/film overlay global para textura premium */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  /* Barra de progresso de leitura (topo) */
+  .scroll-progress {
+    transform: scaleX(var(--p, 0));
+    transform-origin: left center;
+  }
+}
+
+/* ===== Estado inicial dos elementos animados via JS =====
+   Evita "flash" do conteúdo antes da animação de entrada.
+   Se o JS falhar ou reduced-motion estiver ativo, tudo
+   permanece visível (ver regra de prefers-reduced-motion). */
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ===== Acessibilidade: respeitar quem prefere menos movimento ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal],
+  .reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
