@@ -24,7 +24,7 @@ const ICONS: Record<string, IconType> = {
 export default function Dores() {
   return (
     <section id="dores" className="relative overflow-hidden bg-ink-900 py-14 sm:py-20 md:py-32">
-      <FundoImagem src="/img/bg-barbell.jpg" position="object-[50%_25%]" fade="l" opacity={0.16} />
+      <FundoImagem src="/img/fundos/bg-barbell.jpg" position="object-[50%_25%]" fade="l" opacity={0.16} />
       <div className="aurora-blob left-[-8%] top-[-6%] h-72 w-72 animate-aurora bg-blood/10" />
       <div className="container-x relative z-10">
         <CabecalhoSecao kicker={PAINS.kicker} title={PAINS.title} />

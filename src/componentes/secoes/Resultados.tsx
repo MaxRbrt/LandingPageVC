@@ -3,8 +3,6 @@ import { RESULTS, TESTIMONIALS, ABOUT } from "@/dados/conteudo";
 import CabecalhoSecao from "@/componentes/ui/layout/CabecalhoSecao";
 import Revelar from "@/componentes/ui/animacoes/Revelar";
 import BotaoWhatsApp from "@/componentes/ui/botoes/BotaoWhatsApp";
-import FeedInstagram from "@/componentes/ui/midia/FeedInstagram";
-import GaleriaArrastar from "@/componentes/ui/midia/GaleriaArrastar";
 import ComparadorAntesDepois from "@/componentes/ui/midia/ComparadorAntesDepois";
 
 export default function Resultados() {
@@ -31,50 +29,8 @@ export default function Resultados() {
           ))}
         </Revelar>
 
+        {/* PROVA PRINCIPAL: antes e depois lado a lado — leitura imediata, lidera a seção */}
         <div className="mt-14">
-          <Revelar from="up">
-            <span className="kicker mb-4">Direto do Instagram</span>
-          </Revelar>
-          <Revelar from="up">
-            <FeedInstagram items={RESULTS.instaFeed} />
-          </Revelar>
-        </div>
-
-        <div className="mt-16">
-          <Revelar from="up">
-            <span className="kicker mb-6">Casos com contexto</span>
-          </Revelar>
-
-          <Revelar stagger className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:grid-cols-2 md:mx-0 md:grid md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
-            {RESULTS.caseStudies.map((item) => (
-              <figure
-                key={item.src}
-                className="group relative min-h-[420px] overflow-hidden rounded-2xl border border-ink-500/60 bg-ink-800 max-md:w-[82%] max-md:shrink-0 max-md:snap-center"
-              >
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  loading="lazy"
-                  className={`absolute inset-0 h-full w-full scale-[1.03] object-cover ${item.pos ?? "object-center"} transition-transform duration-700 group-hover:scale-[1.08]`}
-                />
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-ink-900/80 to-transparent" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/45 to-transparent" />
-                <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                  <span className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-blood">
-                    <span className="h-px w-6 bg-blood/60" />
-                    {item.tag}
-                  </span>
-                  <h3 className="mt-2 font-display text-2xl uppercase leading-none text-cream">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-cream/72">{item.caption}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </Revelar>
-        </div>
-
-        <div className="mt-16">
           <Revelar from="up">
             <span className="kicker mb-2">Antes e depois real</span>
           </Revelar>
@@ -145,7 +101,7 @@ export default function Resultados() {
           </Revelar>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-16">
           <Revelar from="up">
             <span className="kicker mb-6">Mais transformações reais</span>
           </Revelar>
@@ -188,7 +144,7 @@ export default function Resultados() {
         {TESTIMONIALS.enabled && TESTIMONIALS.items.length > 0 && (
           <div className="mt-16">
             <Revelar from="up">
-              <span className="kicker mb-6">O que elas dizem</span>
+              <span className="kicker mb-6">O que dizem</span>
             </Revelar>
             <div className="grid gap-6 md:grid-cols-2">
               {TESTIMONIALS.items.map((t, i) => (
@@ -206,15 +162,6 @@ export default function Resultados() {
             </div>
           </div>
         )}
-
-        <div className="mt-16">
-          <Revelar from="up">
-            <span className="kicker mb-6">Método aplicado</span>
-          </Revelar>
-          <Revelar from="up">
-            <GaleriaArrastar items={RESULTS.methodProof} label="Método" />
-          </Revelar>
-        </div>
 
         <p className="mt-10 text-xs text-cream/40">
           * Imagens e resultados divulgados com autorização. Resultados variam conforme adesão,

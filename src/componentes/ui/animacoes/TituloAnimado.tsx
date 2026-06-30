@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { gsap } from "@/nucleo/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface Props {
   /** linhas do título; use <b>...</b> para destaque vermelho */

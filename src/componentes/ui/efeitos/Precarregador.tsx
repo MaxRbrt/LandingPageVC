@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { gsap, prefersReducedMotion, ScrollTrigger } from "@/nucleo/gsap";
+import { gsap, prefersReducedMotion, ScrollTrigger } from "@/lib/gsap";
 import { BRAND } from "@/dados/conteudo";
 
 /**

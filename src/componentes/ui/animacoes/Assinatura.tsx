@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { gsap, prefersReducedMotion } from "@/nucleo/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Assinatura "manuscrita" do treinador (motif do landonorris.com, lime→blood).
@@ -40,7 +40,7 @@ export default function Assinatura({
       }
       gsap
         .timeline({ scrollTrigger: { trigger: el, start: "top 82%", once: true } })
-        .to(word, { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power2.out" })
+        .to(word, { clipPath: "inset(-15% 0% -25% -4%)", duration: 1.1, ease: "power2.out" })
         .to(stroke, { strokeDashoffset: 0, duration: 0.7, ease: "power1.out" }, "-=0.35");
     }, el);
     return () => ctx.revert();
@@ -49,8 +49,8 @@ export default function Assinatura({
   return (
     <div ref={root} className={`select-none ${className}`} aria-label={name}>
       <span
-        className={`sig-word block font-signature leading-none text-blood ${size}`}
-        style={{ clipPath: reduce ? "none" : "inset(0 100% 0 0)" }}
+        className={`sig-word block font-signature leading-none text-blood pb-3 ${size}`}
+        style={{ clipPath: reduce ? "none" : "inset(-15% 100% -25% -4%)" }}
       >
         {name}
       </span>

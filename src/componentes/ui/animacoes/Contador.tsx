@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { gsap } from "@/nucleo/gsap";
+import { gsap } from "@/lib/gsap";
 
 /**
  * Conta um número de 0 até o valor alvo quando entra na viewport.

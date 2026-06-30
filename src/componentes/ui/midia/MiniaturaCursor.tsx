@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { gsap, prefersReducedMotion } from "@/nucleo/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Faz uma mini-foto seguir o cursor ao passar o mouse sobre filhos que

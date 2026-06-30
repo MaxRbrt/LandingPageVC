@@ -18,7 +18,7 @@ export const WHATSAPP = {
   // número real (DDI 55 + DDD 14 + número), somente dígitos
   phone: "5514996384316",
   defaultMessage:
-    "Oi Vinicio! Vim pela landing page e quero saber como funciona a consultoria online.",
+    "Olá, Vinicio! Tenho interesse na consultoria online. Pode me explicar como funciona?",
 };
 
 export const INSTAGRAM = {
@@ -44,6 +44,7 @@ export const NAV_LINKS = [
   { label: "Benefícios", href: "#beneficios" },
   { label: "Sobre", href: "#sobre" },
   { label: "Método", href: "#metodo" },
+  { label: "Investimento", href: "#investimento" },
   { label: "FAQ", href: "#faq" },
   { label: "Começar", href: "#comecar" },
 ];
@@ -51,6 +52,12 @@ export const NAV_LINKS = [
 /* ----------------------- HERO ----------------------- */
 export const HERO = {
   eyebrow: "Consultoria online • treino 1:1",
+  // Selo de prova social no topo (verificável: leva pro Instagram real).
+  ratingStrip: {
+    stars: 5,
+    text: "Alunos reais, acompanhados de perto",
+    sub: "veja no Instagram",
+  },
   // <b> destaca em vermelho (renderizado pelo componente)
   titleLines: ["Treino", "inteligente", "para quem", "quer", "<b>resultado</b>", "real"],
   subtitle:
@@ -242,27 +249,94 @@ export const SERVICES = {
   ],
 };
 
+/* ----------------------- PRA QUEM É / NÃO É ----------------------- */
+// Seção qualificadora: faz o aluno certo se ver e filtra curioso.
+export const FOR_WHOM = {
+  kicker: "Honestidade antes de começar",
+  title: "Essa consultoria <b>é pra você</b>?",
+  intro:
+    "Atendimento 1:1 não cabe todo mundo ao mesmo tempo. Melhor saber agora se faz sentido pra você.",
+  forLabel: "É pra você se…",
+  notForLabel: "Não é pra você se…",
+  for: [
+    "Você já tentou sozinho e cansou de recomeçar do zero.",
+    "Quer um treino feito pra sua rotina real, não planilha pronta.",
+    "Topa seguir um processo e ajustar no caminho, com constância.",
+    "Busca resultado sustentável — não milagre de 30 dias.",
+    "Valoriza ter alguém respondendo de verdade quando trava.",
+  ],
+  notFor: [
+    "Procura promessa de “secar numa semana” sem esforço.",
+    "Não pretende treinar com nenhuma regularidade.",
+    "Quer só uma planilha barata pra copiar e sumir.",
+    "Não topa ajustar nada na rotina, no sono ou na alimentação.",
+  ],
+};
+
+/* ----------------------- ESCASSEZ (vagas 1:1) ----------------------- */
+// TODO CLIENTE: confirmar com o Vinicio que a escassez é REAL (nº de vagas/mês).
+// Nunca usar escassez falsa — quebra confiança. enabled=false desativa a faixa.
+export const SCARCITY = {
+  enabled: true,
+  highlight: "Vagas limitadas neste mês",
+  text:
+    "Acompanhamento 1:1 tem teto. A cada mês entram poucas vagas novas, pra cada aluno receber atenção de perto — sem fila, sem robô respondendo por mim.",
+  ctaMessage:
+    "Oi Vinicio! Ainda tem vaga aberta na consultoria esse mês? Quero garantir a minha.",
+};
+
+/* ----------------------- INVESTIMENTO (preço) ----------------------- */
+/* >>> TODO CLIENTE <<<
+   1. Defina o valor com o Vinicio.
+   2. Para EXIBIR o preço: revealPrice = true e preencha amount/period/anchor.
+   3. Para NÃO exibir (valor sob consulta): mantenha revealPrice = false —
+      a seção mostra o enquadramento de valor e manda direto pro WhatsApp. */
+export const PRICING = {
+  revealPrice: false,
+  kicker: "Investimento",
+  title: "Quanto custa <b>fazer certo</b>",
+  // usados só quando revealPrice = true
+  amount: "R$ ___",
+  period: "/mês",
+  anchor:
+    "Menos que algumas sessões de personal no mês — com plano e suporte o mês inteiro.",
+  // usado quando revealPrice = false
+  hiddenIntro:
+    "O valor é definido conforme o plano e o objetivo. Sem pacote inflado: você paga por acompanhamento individual de verdade, não por planilha genérica.",
+  bullets: [
+    "Treino individual, revisado e ajustado ao longo do mês.",
+    "Suporte direto pra dúvida de execução e adesão.",
+    "Progressão conduzida — sem trocar tudo à toa.",
+    "Plano que cabe na sua rotina, não numa versão ideal.",
+  ],
+  cta: "Quero saber o valor e começar",
+  ctaMessage:
+    "Oi Vinicio! Quero saber o valor da consultoria e como começar.",
+};
+
 /* ----------------------- RESULTADOS / PROVA SOCIAL ----------------------- */
 export const RESULTS = {
   kicker: "Resultados reais",
   title: "Transformações com <b>contexto</b>",
   intro:
-    "Fotos reais de alunas, bastidores de treino e conteúdos do próprio Vinicio. A prova aqui não é promessa: é contexto, rotina e método aplicado.",
+    "Fotos reais de alunos e alunas, bastidores de treino e conteúdos do próprio Vinicio. A prova aqui não é promessa: é contexto, rotina e método aplicado.",
   // Comparativos prontos (antes | depois lado a lado, estúdio limpo) — a prova mais fácil de ler num relance.
   comparativos: [
     {
-      src: "/img/01_frente_comparativo.png",
+      src: "/img/antes-depois/01_frente_comparativo.png",
       tag: "Frente",
       caption: "Mesma aluna, de frente. Antes e depois lado a lado.",
     },
     {
-      src: "/img/04_lado_comparativo.png",
+      src: "/img/antes-depois/04_lado_comparativo.png",
       tag: "Perfil",
       caption: "Mesma aluna, de perfil. Mudança de cintura e composição.",
     },
   ] as { src: string; tag: string; caption: string }[],
   // Mais transformações reais (recortadas dos posts "Resultados Team Campos", uso autorizado).
   // ➕ Novas: salve o antes|depois em /public/img/site-acervo/alunas/ e adicione aqui.
+  // >>> TODO CLIENTE: número converte. Peça ao Vinicio a métrica real de cada aluna
+  //     (ex.: "−12 kg", "−8 cm cintura", "5 meses") e preencha `metric` abaixo. <<<
   transformacoes: [
     {
       src: "/img/site-acervo/alunas/card-hevila.jpg",
@@ -304,49 +378,17 @@ export const RESULTS = {
   beforeAfter: [
     {
       tag: "Frontal",
-      before: "/img/02_frente_antes.png",
-      after: "/img/03_frente_depois.png",
+      before: "/img/antes-depois/02_frente_antes.png",
+      after: "/img/antes-depois/03_frente_depois.png",
       caption: "Aluna acompanhada de perto. Arraste e veja a evolução de frente.",
     },
     {
       tag: "Perfil",
-      before: "/img/05_lado_antes.png",
-      after: "/img/06_lado_depois.png",
+      before: "/img/antes-depois/05_lado_antes.png",
+      after: "/img/antes-depois/06_lado_depois.png",
       caption: "Mesma aluna em outro ângulo. Mudança de cintura e postura de perfil.",
     },
   ] as { tag?: string; before: string; after: string; caption: string }[],
-  // FEED do Instagram — cards 4:5 INTEIROS (texto e marca do post aparecem; honesto, é post real).
-  // ➕ NOVAS FOTOS: salve em /public/img/site-acervo/alunas/ e adicione aqui { src, caption }.
-  //    Ideal 6+ posts de aluna. NÃO repetir imagens já usadas em caseStudies (refeed_p01_4, refeed_p08_4).
-  instaFeed: [
-    { src: "/img/site-acervo/refeed_p08/2026-06-10_20-39-13_UTC_5.jpg", caption: "“A cintura afinou, o corpo mudou.” Relato real da Vitória durante a consultoria." },
-    { src: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_9.jpg", caption: "Mudança construída no tempo da vida dela, do início ao acompanhamento de perto." },
-    { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_6.jpg", caption: "Treino que coube na rotina de mãe: três, quatro vezes na semana quando dava." },
-    { src: "/img/site-acervo/refeed_p08/2026-06-10_20-39-13_UTC_1.jpg", caption: "Voltar a se reconhecer no espelho — a motivação que sustenta o processo." },
-  ] as { src: string; caption?: string }[],
-  caseStudies: [
-    {
-      tag: "Caso real",
-      title: "Energia para viver melhor",
-      src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_4.jpg",
-      caption: "Chegou cansada, sem energia pra brincar com a filha. O foco foi devolver disposição — não só mudar o número da balança.",
-      pos: "object-[55%_35%]",
-    },
-    {
-      tag: "Rotina real",
-      title: "Plano construído para caber",
-      src: "/img/site-acervo/refeed_p08/2026-06-10_20-39-13_UTC_4.jpg",
-      caption: "O treino foi montado em cima da rotina real dela, não de uma versão ideal impossível de manter.",
-      pos: "object-center",
-    },
-    {
-      tag: "Vivência",
-      title: "Autoridade por prática",
-      src: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_1.jpg",
-      caption: "Antes de orientar alunas, o Vinicio passou pela própria transformação. A metodologia nasceu da prática, não só da teoria.",
-      pos: "object-[50%_38%]",
-    },
-  ] as { tag: string; title: string; src: string; caption: string; pos?: string }[],
   methodProof: [
     { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_2.jpg", caption: "Esforço no lugar certo: a tese da consultoria.", pos: "object-center" },
     { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_9.jpg", caption: "Platô existe quando o treino deixa de ser genérico.", pos: "object-center" },
@@ -370,6 +412,14 @@ export const TESTIMONIALS = {
       quote:
         "Hoje recebi um elogio e fiquei muito feliz: disseram que minha cintura está mais fina. Nossa, ganhei meu dia! Pra quem estava se sentindo travada uns anos atrás, isso é tudo.",
     },
+    /* >>> TODO CLIENTE: 4–6 depoimentos convertem muito mais que 1. <<<
+       Peça ao Vinicio prints/áudios reais (com autorização) e cole no formato:
+    {
+      name: "Nome real",
+      context: "Ex.: Emagrecimento • 4 meses",
+      quote: "Frase real do aluno, sem editar demais — quanto mais específico, melhor.",
+    },
+    */
   ] as { name: string; context: string; quote: string }[],
 };
 
@@ -393,7 +443,7 @@ export const MOTIVATION = {
 export const TRANSFORMATION = {
   kicker: "Vivência própria",
   title: "Autoridade construída na <b>prática</b>",
-  desc: "Antes de acompanhar alunas, Vinicio passou pelo mesmo processo de transformação. Ele entende frustração, efeito sanfona e a dificuldade de manter constância — de dentro para fora.",
+  desc: "Antes de acompanhar alunos e alunas, Vinicio passou pelo mesmo processo de transformação. Ele entende frustração, efeito sanfona e a dificuldade de manter constância — de dentro para fora.",
   image: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_1.jpg",
   caption: "Vivência própria · do aluno ao treinador",
   quote: "Você não precisa fazer mais. Precisa fazer o certo, com método e acompanhamento.",
@@ -423,6 +473,20 @@ export const FAQ = {
     {
       q: "Em quanto tempo vejo resultado?",
       a: "Depende do ponto de partida, adesão, rotina e objetivo. A proposta é evolução consistente, não promessa rápida.",
+    },
+    {
+      q: "Quanto custa a consultoria?",
+      // TODO CLIENTE: quando o Vinicio definir o valor, troque por um número claro aqui.
+      a: "O valor é definido conforme o plano e o objetivo, porque o acompanhamento é individual — nada de pacote inflado. Manda mensagem no WhatsApp que te passo o valor certo pro seu caso e como começar.",
+    },
+    {
+      q: "E se eu não tiver tempo de treinar?",
+      a: "O plano é montado em cima da sua rotina real, não de uma versão ideal. Treino possível com o tempo e os dias que você tem — três ou quatro vezes na semana já dá pra construir resultado com constância.",
+    },
+    {
+      q: "E se não funcionar pra mim? Tem garantia?",
+      // TODO CLIENTE: confirmar política de cancelamento/fidelidade real antes de prometer.
+      a: "A primeira conversa é diagnóstica e sem compromisso: você entende o plano antes de decidir. No acompanhamento, ajuste de rota está incluso — se algo não está rendendo, a gente corrige junto, sem você recomeçar do zero. Não existe promessa mágica, existe processo acompanhado.",
     },
     {
       q: "Você trabalha com emagrecimento?",
@@ -469,6 +533,13 @@ export const FINAL_CTA = {
   // Fundo cinematográfico (renderizado bem escuro p/ esconder overlay do print)
   image: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.jpg",
   cta: "Falar com o Vinicio no WhatsApp",
+  // Garantia / risco-zero: honesto, sem promessa de devolução de dinheiro.
+  // TODO CLIENTE: confirmar com o Vinicio a política real (fidelidade? cancelamento?).
+  guarantee: {
+    title: "Risco zero pra dar o primeiro passo",
+    text:
+      "A primeira conversa é diagnóstica e sem compromisso: você entende o plano e como tudo funciona antes de decidir. Sem fidelidade forçada, sem letra miúda.",
+  },
   // Reforço de confiança (honesto, sem promessa de devolução de dinheiro)
   trust: [
     "Primeira conversa sem compromisso",

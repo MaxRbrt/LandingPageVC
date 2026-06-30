@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useRef } from "react";
 import { FaArrowDown } from "react-icons/fa";
-import { TbUsers, TbArrowRight } from "react-icons/tb";
-import { gsap, prefersReducedMotion } from "@/nucleo/gsap";
-import { HERO } from "@/dados/conteudo";
+import { TbUsers, TbArrowRight, TbStarFilled } from "react-icons/tb";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { HERO, INSTAGRAM } from "@/dados/conteudo";
 import TituloAnimado from "@/componentes/ui/animacoes/TituloAnimado";
+import Contador from "@/componentes/ui/animacoes/Contador";
 
 // Three.js sai do bundle principal (carrega sob demanda após o 1º paint).
 const FundoParticulas = lazy(() => import("@/componentes/ui/efeitos/FundoParticulas"));
@@ -21,7 +22,8 @@ export default function Destaque() {
     const ctx = gsap.context(() => {
       gsap
         .timeline({ defaults: { ease: "power3.out", duration: 0.9 } })
-        .from(".hero-eyebrow", { y: 20, opacity: 0, delay: 0.2 })
+        .from(".hero-rating", { y: 16, opacity: 0, delay: 0.1 })
+        .from(".hero-eyebrow", { y: 20, opacity: 0 }, "-=0.55")
         .from(".hero-portrait", { x: 40, opacity: 0, duration: 1.1 }, "-=0.6")
         .from(".hero-sub", { y: 24, opacity: 0 }, "-=0.7")
         .from(".hero-cta", { y: 24, opacity: 0, stagger: 0.12 }, "-=0.5")
@@ -54,6 +56,26 @@ export default function Destaque() {
       <div className="container-x relative z-10 grid min-h-[100svh] items-center gap-12 pt-24 pb-20 md:grid-cols-[1.15fr_0.85fr]">
         {/* Coluna de texto */}
         <div className="flex flex-col justify-center">
+          {/* Selo de prova social no topo (verificável → Instagram) */}
+          <a
+            href={INSTAGRAM.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-rating group mb-6 inline-flex w-fit items-center gap-3 rounded-full border border-ink-500/60 bg-ink-800/70 px-4 py-2 backdrop-blur transition-colors hover:border-blood/50"
+          >
+            <span className="flex items-center gap-0.5 text-blood">
+              {Array.from({ length: HERO.ratingStrip.stars }).map((_, i) => (
+                <TbStarFilled key={i} className="text-sm" />
+              ))}
+            </span>
+            <span className="text-xs font-medium text-cream/80">
+              {HERO.ratingStrip.text}
+              <span className="ml-1.5 text-cream/45 group-hover:text-blood">
+                · {HERO.ratingStrip.sub}
+              </span>
+            </span>
+          </a>
+
           <span className="hero-eyebrow kicker mb-6 max-w-full flex-wrap leading-relaxed">{HERO.eyebrow}</span>
 
           <TituloAnimado as="h1" lines={HERO.titleLines} className="max-w-2xl" />
@@ -87,7 +109,7 @@ export default function Destaque() {
                 <TbUsers />
               </span>
               <p className="text-sm font-medium text-cream/85">
-                <span className="font-display text-blood">{HERO.proof.split(" ")[0]}</span>{" "}
+                <Contador value={HERO.proof.split(" ")[0]} className="font-display text-blood" />{" "}
                 {HERO.proof.split(" ").slice(1).join(" ")}
               </p>
             </div>

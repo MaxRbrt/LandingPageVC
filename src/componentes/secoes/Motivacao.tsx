@@ -1,7 +1,7 @@
 import { MOTIVATION } from "@/dados/conteudo";
 import CabecalhoSecao from "@/componentes/ui/layout/CabecalhoSecao";
 import Revelar from "@/componentes/ui/animacoes/Revelar";
-import CarrosselFotos from "@/componentes/ui/midia/CarrosselFotos";
+import CarrosselFotos from "@/componentes/ui/midia/carrosseis/CarrosselFotos";
 
 export default function Motivacao() {
   return (

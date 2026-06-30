@@ -1,5 +1,5 @@
 import { ReactNode, useRef, useState } from "react";
-import { prefersReducedMotion } from "@/nucleo/gsap";
+import { prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Card com tilt 3D acompanhando o mouse (microinteração de hover).
@@ -20,6 +20,9 @@ export default function CartaoInclinado({
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current || prefersReducedMotion()) return;
+    // Só em dispositivos com mouse real — no touch o "tap" dispararia o
+    // tilt+zoom e o card estourava a borda do carrossel (corte da linha vermelha).
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const rx = ((e.clientY - top) / height - 0.5) * -intensity;
     const ry = ((e.clientX - left) / width - 0.5) * intensity;

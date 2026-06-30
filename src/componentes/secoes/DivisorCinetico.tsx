@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { gsap, prefersReducedMotion } from "@/nucleo/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { KINETIC } from "@/dados/conteudo";
 
 /**

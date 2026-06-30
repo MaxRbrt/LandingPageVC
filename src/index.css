@@ -8,14 +8,17 @@
 
 html {
   scroll-behavior: smooth;
+  /* Trava estouro horizontal na RAIZ também — só no body não basta em alguns
+     engines mobile (o documento ainda pana lateralmente). `clip` não cria
+     contêiner de rolagem, então não quebra nav fixo nem âncoras. */
+  overflow-x: clip;
 }
 
 body {
   @apply bg-ink-900 text-cream font-sans antialiased;
-  /* Trava estouro horizontal (ex.: faixas em marquee) sem criar contêiner de
-     rolagem — evita que o navegador in-app do Instagram renderize com zoom-out.
-     `clip` (não `hidden`) p/ não interferir no nav fixo nem nas âncoras. */
   overflow-x: clip;
+  /* Defesa extra: nada deve ultrapassar a largura da viewport. */
+  max-width: 100%;
 }
 
 /* Tipografia de display condensada */

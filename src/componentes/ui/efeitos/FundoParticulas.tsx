@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { prefersReducedMotion } from "@/nucleo/gsap";
+import { prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Backdrop 3D do hero: campo de partículas com profundidade (fog),

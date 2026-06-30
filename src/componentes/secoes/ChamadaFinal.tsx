@@ -1,4 +1,4 @@
-import { TbCheck } from "react-icons/tb";
+import { TbCheck, TbShieldCheck } from "react-icons/tb";
 import { FINAL_CTA } from "@/dados/conteudo";
 import TituloAnimado from "@/componentes/ui/animacoes/TituloAnimado";
 import Revelar from "@/componentes/ui/animacoes/Revelar";
@@ -34,7 +34,20 @@ export default function ChamadaFinal() {
         <Revelar from="up" delay={0.1}>
           <p className="mx-auto mt-7 max-w-2xl text-lg text-cream/75">{FINAL_CTA.desc}</p>
         </Revelar>
-        <Revelar from="scale" delay={0.2} className="mt-10">
+        {/* Garantia / risco-zero — tira o medo de errar antes do clique */}
+        <Revelar from="up" delay={0.15} className="mt-9 w-full">
+          <div className="mx-auto flex max-w-xl items-start gap-4 rounded-2xl border border-blood/30 bg-ink-800/70 p-5 text-left backdrop-blur md:p-6">
+            <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blood/15 text-xl text-blood">
+              <TbShieldCheck />
+            </span>
+            <div>
+              <p className="font-semibold text-cream">{FINAL_CTA.guarantee.title}</p>
+              <p className="mt-1 text-sm text-cream/70">{FINAL_CTA.guarantee.text}</p>
+            </div>
+          </div>
+        </Revelar>
+
+        <Revelar from="scale" delay={0.2} className="mt-8">
           <EfeitoMagnetico>
             <BotaoWhatsApp message={FINAL_CTA.whatsappMessage} className="!px-9 !py-4 !text-base">
               {FINAL_CTA.cta}

@@ -1,27 +1,32 @@
 import { useEffect } from "react";
 import { usarRolagemSuave } from "@/ganchos/usarRolagemSuave";
-import { ScrollTrigger } from "@/nucleo/gsap";
+import { ScrollTrigger } from "@/lib/gsap";
 import { FAQ } from "@/dados/conteudo";
 
-import BarraNavegacao from "@/componentes/secoes/BarraNavegacao";
-import Destaque from "@/componentes/secoes/Destaque";
-import Letreiro from "@/componentes/secoes/Letreiro";
-import Dores from "@/componentes/secoes/Dores";
-import Solucao from "@/componentes/secoes/Solucao";
-import DivisorCinetico from "@/componentes/secoes/DivisorCinetico";
-import Comparativo from "@/componentes/secoes/Comparativo";
-import Beneficios from "@/componentes/secoes/Beneficios";
-import Manifesto from "@/componentes/secoes/Manifesto";
-import Sobre from "@/componentes/secoes/Sobre";
-import Metodo from "@/componentes/secoes/Metodo";
-import Servicos from "@/componentes/secoes/Servicos";
-import Motivacao from "@/componentes/secoes/Motivacao";
-import Resultados from "@/componentes/secoes/Resultados";
-import Transformacao from "@/componentes/secoes/Transformacao";
-import PerguntasFrequentes from "@/componentes/secoes/PerguntasFrequentes";
-import ComoComecar from "@/componentes/secoes/ComoComecar";
-import ChamadaFinal from "@/componentes/secoes/ChamadaFinal";
-import Rodape from "@/componentes/secoes/Rodape";
+import {
+  BarraNavegacao,
+  Destaque,
+  Letreiro,
+  Dores,
+  Solucao,
+  DivisorCinetico,
+  Comparativo,
+  Beneficios,
+  Manifesto,
+  Sobre,
+  Metodo,
+  Servicos,
+  ParaQuem,
+  Motivacao,
+  Resultados,
+  Transformacao,
+  Investimento,
+  PerguntasFrequentes,
+  Escassez,
+  ComoComecar,
+  ChamadaFinal,
+  Rodape,
+} from "@/componentes/secoes";
 import WhatsAppFlutuante from "@/componentes/ui/botoes/WhatsAppFlutuante";
 import BarraCtaFixa from "@/componentes/ui/botoes/BarraCtaFixa";
 import ProgressoRolagem from "@/componentes/ui/animacoes/ProgressoRolagem";
@@ -84,9 +89,12 @@ export default function App() {
         <Sobre />
         <Metodo />
         <Servicos />
+        <ParaQuem />
         <Motivacao />
         <Transformacao />
+        <Investimento />
         <PerguntasFrequentes />
+        <Escassez />
         <ComoComecar />
         <ChamadaFinal />
       </main>

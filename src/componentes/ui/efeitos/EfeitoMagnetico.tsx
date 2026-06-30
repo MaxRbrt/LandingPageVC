@@ -1,5 +1,5 @@
 import { ReactNode, useRef } from "react";
-import { prefersReducedMotion } from "@/nucleo/gsap";
+import { prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Envolve um elemento (ex.: CTA) e o "puxa" suavemente em direção ao

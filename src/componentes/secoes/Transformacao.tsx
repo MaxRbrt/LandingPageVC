@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 import { TRANSFORMATION } from "@/dados/conteudo";
-import { gsap } from "@/nucleo/gsap";
+import { gsap } from "@/lib/gsap";
 import Revelar from "@/componentes/ui/animacoes/Revelar";
 import Assinatura from "@/componentes/ui/animacoes/Assinatura";
 
 /**
  * Banda cinematográfica full-bleed (referência: landonorris.com).
  * Foto em duotone vermelho com parallax + frase gigante sobreposta +
- * legenda editorial e assinatura. Substitui o layout 2-col anterior.
+ * legenda editorial e assinatura. Momento emocional/autoridade antes da oferta.
  */
 export default function Transformacao() {
   const imgRef = useRef<HTMLImageElement | null>(null);

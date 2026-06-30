@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
-import { gsap } from "@/nucleo/gsap";
+import { gsap } from "@/lib/gsap";
 import { BRAND, INSTAGRAM, NAV_LINKS, waLink } from "@/dados/conteudo";
 
 /**

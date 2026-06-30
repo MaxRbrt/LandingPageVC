@@ -1,5 +1,5 @@
 import { ElementType, ReactNode, useEffect, useRef } from "react";
-import { gsap } from "@/nucleo/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface Props {
   children: ReactNode;
