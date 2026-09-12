@@ -14,6 +14,10 @@ const LARGURA_MAX = 1600;
 const QUALIDADE = 82;
 const CONVERSIVEIS = new Set([".png", ".jpg", ".jpeg"]);
 
+// og.jpg fica de fora: é a imagem do preview de link e os scrapers do
+// WhatsApp/Facebook não renderizam WebP.
+const PRESERVAR = new Set(["og.jpg"]);
+
 async function listar(dir) {
   const entradas = await readdir(dir, { withFileTypes: true });
   const arquivos = await Promise.all(
@@ -25,8 +29,10 @@ async function listar(dir) {
   return arquivos.flat();
 }
 
-const arquivos = (await listar(RAIZ)).filter((f) =>
-  CONVERSIVEIS.has(extname(f).toLowerCase())
+const arquivos = (await listar(RAIZ)).filter(
+  (f) =>
+    CONVERSIVEIS.has(extname(f).toLowerCase()) &&
+    !PRESERVAR.has(f.split(/[\\/]/).pop())
 );
 
 let antes = 0;

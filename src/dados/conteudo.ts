@@ -84,7 +84,7 @@ export const HERO = {
   ctaSecondary: "Ver o método",
   proof: "+500 alunos transformados",
   proofSub: "100% online e individual • acompanhamento 1:1",
-  image: "/img/site-acervo/highlights-treinos/frames/treino-153_f2.webp",
+  image: "/img/site-acervo/vinicio-hero.webp",
   imagePosition: "object-[50%_28%]",
   // Chips flutuantes sobre o retrato (prova rápida)
   badges: [
