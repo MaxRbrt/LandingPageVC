@@ -54,6 +54,9 @@ npm run build
 
 # 4. pré-visualizar o build
 npm run preview
+
+# 5. converter imagens novas de /public para WebP (roda depois de adicionar fotos)
+npm run img:webp
 ```
 
 > Requer **Node 18+**. O `build` roda `tsc --noEmit` antes do Vite — se o TypeScript reclamar, o build falha de propósito.
@@ -125,6 +128,8 @@ firebase deploy --only hosting
 ```
 
 > Precisa do **firebase-tools** (`npm i -g firebase-tools`) e de `firebase login`.
+
+Para ativar o domínio próprio e rodar tráfego pago, siga [`PRODUCAO.md`](./PRODUCAO.md) — cobre domínio, plano Blaze, URLs absolutas e os IDs de Pixel/Ads.
 
 ---
 

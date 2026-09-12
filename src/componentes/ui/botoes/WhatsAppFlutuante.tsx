@@ -33,6 +33,7 @@ export default function WhatsAppFlutuante() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
+        data-cta="botao flutuante"
         className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-2xl text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95"
       >
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-pulse-ring" aria-hidden />

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { usarRolagemSuave } from "@/ganchos/usarRolagemSuave";
 import { ScrollTrigger } from "@/lib/gsap";
+import { iniciarRastreamento, observarCliquesWhatsApp } from "@/lib/rastreio";
 import { FAQ } from "@/dados/conteudo";
 
 import {
@@ -58,6 +59,11 @@ function useFaqSchema() {
 export default function App() {
   usarRolagemSuave();
   useFaqSchema();
+
+  useEffect(() => {
+    iniciarRastreamento();
+    return observarCliquesWhatsApp();
+  }, []);
 
   // Recalcula posições do ScrollTrigger depois que imagens/layout assentam.
   useEffect(() => {

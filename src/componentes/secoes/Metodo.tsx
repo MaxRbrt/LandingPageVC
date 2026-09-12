@@ -57,7 +57,7 @@ export default function Metodo() {
         id="metodo"
         className="relative overflow-hidden bg-ink-900 py-14 sm:py-20 md:py-32 lg:h-screen lg:py-0"
       >
-        <FundoImagem src="/img/fundos/exec-squat.jpg" position="object-[50%_25%]" fade="y" opacity={0.1} />
+        <FundoImagem src="/img/fundos/exec-squat.webp" position="object-[50%_25%]" fade="y" opacity={0.1} />
 
         {/* MOBILE/tablet: título + carrossel das etapas que anda sozinho */}
         <div className="container-x relative z-10 lg:hidden">

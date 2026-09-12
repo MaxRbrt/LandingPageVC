@@ -31,6 +31,7 @@ export default function BarraCtaFixa() {
           href={waLink()}
           target="_blank"
           rel="noopener noreferrer"
+          data-cta="barra fixa mobile"
           className="inline-flex shrink-0 items-center gap-2 rounded-full bg-blood px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white glow-red active:scale-95"
         >
           <FaWhatsapp className="text-base" /> Falar

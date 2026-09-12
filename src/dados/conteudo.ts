@@ -30,6 +30,24 @@ export const INSTAGRAM = {
 export const waLink = (message: string = WHATSAPP.defaultMessage) =>
   `https://wa.me/${WHATSAPP.phone}?text=${encodeURIComponent(message)}`;
 
+/* ----------------------- RASTREAMENTO (ADS) -----------------------
+ * Preencha com os IDs reais para ligar o rastreamento. Campo vazio =
+ * aquele script simplesmente não carrega (nada quebra, nada pesa).
+ * Todo clique em WhatsApp já dispara a conversão automaticamente.
+ *
+ * Onde pegar cada ID:
+ *  - metaPixelId ......... Gerenciador de Eventos da Meta → Fontes de dados. Ex.: "1234567890"
+ *  - ga4Id ............... GA4 → Admin → Fluxos de dados. Ex.: "G-XXXXXXX"
+ *  - googleAdsId ......... Google Ads → Ferramentas → Tags. Ex.: "AW-123456789"
+ *  - googleAdsConversionLabel ... rótulo da ação de conversão no Google Ads. Ex.: "AbC-D_efGh"
+ */
+export const TRACKING = {
+  metaPixelId: "",
+  ga4Id: "",
+  googleAdsId: "",
+  googleAdsConversionLabel: "",
+};
+
 /* ----------------------- MARCA ----------------------- */
 export const BRAND = {
   name: "Vinicio Campos",
@@ -66,7 +84,7 @@ export const HERO = {
   ctaSecondary: "Ver o método",
   proof: "+500 alunos transformados",
   proofSub: "100% online e individual • acompanhamento 1:1",
-  image: "/img/site-acervo/highlights-treinos/frames/treino-153_f2.jpg",
+  image: "/img/site-acervo/highlights-treinos/frames/treino-153_f2.webp",
   imagePosition: "object-[50%_28%]",
   // Chips flutuantes sobre o retrato (prova rápida)
   badges: [
@@ -190,7 +208,7 @@ export const MANIFESTO = {
 export const ABOUT = {
   kicker: "Quem te acompanha",
   title: "Eu já fui o aluno que <b>atendo hoje</b>",
-  image: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_1.jpg",
+  image: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_1.webp",
   imagePosition: "object-[50%_38%]",
   paragraphs: [
     "Vinicio Campos é treinador e coach de consultoria online, com foco em treinos inteligentes, suporte real e transformações sustentáveis.",
@@ -240,12 +258,12 @@ export const SERVICES = {
     "Uma oferta, vários focos. O acompanhamento se adapta ao que você precisa agora.",
   // `thumb`: mini-foto que segue o cursor ao passar o mouse no item.
   items: [
-    { tag: "Emagrecimento", desc: "Estratégia para emagrecer com consistência, sem efeito sanfona.", thumb: "/img/site-acervo/refeed_p08/2026-06-10_20-39-13_UTC_4.jpg" },
-    { tag: "Hipertrofia", desc: "Ganho de massa e força com progressão bem conduzida.", thumb: "/img/site-acervo/highlights-treinos/frames/treino-75_f2.jpg" },
-    { tag: "Treino feminino", desc: "Treino que respeita o corpo feminino, ciclo e recuperação.", thumb: "/img/site-acervo/refeed_p12/2026-06-05_14-02-08_UTC_10.jpg" },
-    { tag: "Recomposição corporal", desc: "Reduzir gordura e construir músculo de forma sustentável.", thumb: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_1.jpg" },
-    { tag: "Rotina corrida", desc: "Plano possível para trabalho, família e pouco tempo disponível.", thumb: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_5.jpg" },
-    { tag: "Saúde e condicionamento", desc: "Mais disposição, força e qualidade de vida no dia a dia.", thumb: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.jpg" },
+    { tag: "Emagrecimento", desc: "Estratégia para emagrecer com consistência, sem efeito sanfona.", thumb: "/img/site-acervo/refeed_p08/2026-06-10_20-39-13_UTC_4.webp" },
+    { tag: "Hipertrofia", desc: "Ganho de massa e força com progressão bem conduzida.", thumb: "/img/site-acervo/highlights-treinos/frames/treino-75_f2.webp" },
+    { tag: "Treino feminino", desc: "Treino que respeita o corpo feminino, ciclo e recuperação.", thumb: "/img/site-acervo/refeed_p12/2026-06-05_14-02-08_UTC_10.webp" },
+    { tag: "Recomposição corporal", desc: "Reduzir gordura e construir músculo de forma sustentável.", thumb: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_1.webp" },
+    { tag: "Rotina corrida", desc: "Plano possível para trabalho, família e pouco tempo disponível.", thumb: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_5.webp" },
+    { tag: "Saúde e condicionamento", desc: "Mais disposição, força e qualidade de vida no dia a dia.", thumb: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.webp" },
   ],
 };
 
@@ -323,12 +341,12 @@ export const RESULTS = {
   // Comparativos prontos (antes | depois lado a lado, estúdio limpo) — a prova mais fácil de ler num relance.
   comparativos: [
     {
-      src: "/img/antes-depois/01_frente_comparativo.png",
+      src: "/img/antes-depois/01_frente_comparativo.webp",
       tag: "Frente",
       caption: "Karine, de frente. Antes e depois lado a lado.",
     },
     {
-      src: "/img/antes-depois/04_lado_comparativo.png",
+      src: "/img/antes-depois/04_lado_comparativo.webp",
       tag: "Perfil",
       caption: "Karine, de perfil. Mudança de cintura e composição.",
     },
@@ -339,37 +357,37 @@ export const RESULTS = {
   //     (ex.: "−12 kg", "−8 cm cintura", "5 meses") e preencha `metric` abaixo. <<<
   transformacoes: [
     {
-      src: "/img/site-acervo/alunas/card-hevila.jpg",
+      src: "/img/site-acervo/alunas/card-hevila.webp",
       name: "Hevila",
       context: "Venceu a obesidade",
       metric: "−27 kg",
       caption: "Perdeu 27 kg com método e constância — e hoje vive com mais saúde.",
     },
     {
-      src: "/img/site-acervo/alunas/card-aluna01.jpg",
+      src: "/img/site-acervo/alunas/card-aluna01.webp",
       context: "Emagrecimento com treino resistido",
       caption: "Emagrecimento sem flacidez, com treino resistido e plano individual.",
     },
     {
-      src: "/img/site-acervo/alunas/card-erika.jpg",
+      src: "/img/site-acervo/alunas/card-erika.webp",
       name: "Érika",
       context: "Voltou após a pandemia",
       caption: "Voltou após a pandemia e transformou corpo e mente.",
     },
     {
-      src: "/img/site-acervo/alunas/card-juliana.jpg",
+      src: "/img/site-acervo/alunas/card-juliana.webp",
       name: "Juliana",
       context: "Recomposição corporal",
       caption: "Cintura e abdômen: mudança de composição com treino e constância.",
     },
     {
-      src: "/img/site-acervo/alunas/card-marielle.jpg",
+      src: "/img/site-acervo/alunas/card-marielle.webp",
       name: "Marielle",
       context: "Emagrecimento e definição",
       caption: "Evolução de perfil: menos gordura, mais definição e postura.",
     },
     {
-      src: "/img/site-acervo/alunas/card-vinicio.jpg",
+      src: "/img/site-acervo/alunas/card-vinicio.webp",
       name: "Vinicio",
       context: "O próprio treinador",
       caption: "Antes de orientar, viveu o processo: de ~105 kg ao shape atual. Autoridade na prática.",
@@ -378,24 +396,24 @@ export const RESULTS = {
   beforeAfter: [
     {
       tag: "Frontal",
-      before: "/img/antes-depois/02_frente_antes.png",
-      after: "/img/antes-depois/03_frente_depois.png",
+      before: "/img/antes-depois/02_frente_antes.webp",
+      after: "/img/antes-depois/03_frente_depois.webp",
       caption: "Karine acompanhada de perto. Arraste e veja a evolução de frente.",
     },
     {
       tag: "Perfil",
-      before: "/img/antes-depois/05_lado_antes.png",
-      after: "/img/antes-depois/06_lado_depois.png",
+      before: "/img/antes-depois/05_lado_antes.webp",
+      after: "/img/antes-depois/06_lado_depois.webp",
       caption: "Karine em outro ângulo. Mudança de cintura e postura de perfil.",
     },
   ] as { tag?: string; before: string; after: string; caption: string }[],
   methodProof: [
-    { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_2.jpg", caption: "Esforço no lugar certo: a tese da consultoria.", pos: "object-center" },
-    { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_9.jpg", caption: "Platô existe quando o treino deixa de ser genérico.", pos: "object-center" },
-    { src: "/img/site-acervo/refeed_p07/2026-06-11_14-52-16_UTC_2.jpg", caption: "Conteúdo técnico sobre ponto fraco e prescrição inteligente.", pos: "object-center" },
-    { src: "/img/site-acervo/refeed_p07/2026-06-11_14-52-16_UTC_3.jpg", caption: "Exemplo de educação sobre execução e recrutamento muscular.", pos: "object-center" },
-    { src: "/img/site-acervo/refeed_p12/2026-06-05_14-02-08_UTC_1.jpg", caption: "Performance muda conforme o ciclo: treino com contexto.", pos: "object-center" },
-    { src: "/img/site-acervo/refeed_p12/2026-06-05_14-02-08_UTC_7.jpg", caption: "TPM e treino: ajuste de expectativa sem abandonar o plano.", pos: "object-center" },
+    { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_2.webp", caption: "Esforço no lugar certo: a tese da consultoria.", pos: "object-center" },
+    { src: "/img/site-acervo/refeed_p01/2026-06-01_20-35-48_UTC_9.webp", caption: "Platô existe quando o treino deixa de ser genérico.", pos: "object-center" },
+    { src: "/img/site-acervo/refeed_p07/2026-06-11_14-52-16_UTC_2.webp", caption: "Conteúdo técnico sobre ponto fraco e prescrição inteligente.", pos: "object-center" },
+    { src: "/img/site-acervo/refeed_p07/2026-06-11_14-52-16_UTC_3.webp", caption: "Exemplo de educação sobre execução e recrutamento muscular.", pos: "object-center" },
+    { src: "/img/site-acervo/refeed_p12/2026-06-05_14-02-08_UTC_1.webp", caption: "Performance muda conforme o ciclo: treino com contexto.", pos: "object-center" },
+    { src: "/img/site-acervo/refeed_p12/2026-06-05_14-02-08_UTC_7.webp", caption: "TPM e treino: ajuste de expectativa sem abandonar o plano.", pos: "object-center" },
   ] as { src: string; caption: string; pos?: string }[],
 };
 
@@ -430,12 +448,12 @@ export const MOTIVATION = {
   intro:
     "Treino não é punição e motivação não é sorte: é método, constância e acompanhamento de perto.",
   items: [
-    { src: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.jpg", caption: "Levantamento com controle e intenção.", pos: "object-[50%_20%]" },
-    { src: "/img/site-acervo/highlights-treinos/frames/treino-25_f2.jpg", caption: "Treinar com método, não no automático.", pos: "object-[50%_28%]" },
-    { src: "/img/site-acervo/highlights-treinos/frames/treino-55_f2.jpg", caption: "Execução real, foco real, ajuste real.", pos: "object-[50%_18%]" },
-    { src: "/img/site-acervo/highlights-treinos/frames/treino-75_f2.jpg", caption: "Progressão conduzida, carga no tempo certo.", pos: "object-[50%_24%]" },
-    { src: "/img/site-acervo/highlights-treinos/frames/treino-103_f2.jpg", caption: "Amplitude e técnica também fazem parte do resultado.", pos: "object-[50%_30%]" },
-    { src: "/img/site-acervo/highlights-treinos/frames/treino-153_f2.jpg", caption: "Quem orienta treina de verdade.", pos: "object-[50%_22%]" },
+    { src: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.webp", caption: "Levantamento com controle e intenção.", pos: "object-[50%_20%]" },
+    { src: "/img/site-acervo/highlights-treinos/frames/treino-25_f2.webp", caption: "Treinar com método, não no automático.", pos: "object-[50%_28%]" },
+    { src: "/img/site-acervo/highlights-treinos/frames/treino-55_f2.webp", caption: "Execução real, foco real, ajuste real.", pos: "object-[50%_18%]" },
+    { src: "/img/site-acervo/highlights-treinos/frames/treino-75_f2.webp", caption: "Progressão conduzida, carga no tempo certo.", pos: "object-[50%_24%]" },
+    { src: "/img/site-acervo/highlights-treinos/frames/treino-103_f2.webp", caption: "Amplitude e técnica também fazem parte do resultado.", pos: "object-[50%_30%]" },
+    { src: "/img/site-acervo/highlights-treinos/frames/treino-153_f2.webp", caption: "Quem orienta treina de verdade.", pos: "object-[50%_22%]" },
   ],
 };
 
@@ -444,7 +462,7 @@ export const TRANSFORMATION = {
   kicker: "Vivência própria",
   title: "Autoridade construída na <b>prática</b>",
   desc: "Antes de acompanhar alunos e alunas, Vinicio passou pelo mesmo processo de transformação. Ele entende frustração, efeito sanfona e a dificuldade de manter constância — de dentro para fora.",
-  image: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_1.jpg",
+  image: "/img/site-acervo/refeed_p03/2026-05-25_14-55-02_UTC_1.webp",
   caption: "Vivência própria · do aluno ao treinador",
   quote: "Você não precisa fazer mais. Precisa fazer o certo, com método e acompanhamento.",
 };
@@ -531,7 +549,7 @@ export const FINAL_CTA = {
   title: "Pare de tentar por conta própria.<br/>Comece a <b>acertar com direção</b>.",
   desc: "Se você se esforça e não vê resultado, talvez o problema não seja você. Talvez falte um processo feito para a sua vida real.",
   // Fundo cinematográfico (renderizado bem escuro p/ esconder overlay do print)
-  image: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.jpg",
+  image: "/img/site-acervo/highlights-treinos/frames/treino-15_f2.webp",
   cta: "Falar com o Vinicio no WhatsApp",
   // Garantia / risco-zero: honesto, sem promessa de devolução de dinheiro.
   // TODO CLIENTE: confirmar com o Vinicio a política real (fidelidade? cancelamento?).

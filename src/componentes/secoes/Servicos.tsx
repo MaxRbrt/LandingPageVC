@@ -67,7 +67,7 @@ export default function Servicos() {
 
   return (
     <section id="servicos" className="relative overflow-hidden bg-ink-800 py-14 sm:py-20 md:py-32">
-      <FundoImagem src="/img/fundos/bg-strength.jpg" position="object-center" fade="l" opacity={0.13} tint="bg-blood/10" />
+      <FundoImagem src="/img/fundos/bg-strength.webp" position="object-center" fade="l" opacity={0.13} tint="bg-blood/10" />
       <div className="container-x relative z-10">
         <div className="max-w-2xl">
           <CabecalhoSecao kicker={SERVICES.kicker} title={SERVICES.title} />

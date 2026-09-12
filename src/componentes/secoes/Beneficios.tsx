@@ -20,7 +20,7 @@ export default function Beneficios() {
 
   return (
     <section id="beneficios" className="relative overflow-hidden bg-ink-900 py-14 sm:py-20 md:py-32">
-      <FundoImagem src="/img/fundos/bg-coach.jpg" position="object-top" fade="y" opacity={0.12} />
+      <FundoImagem src="/img/fundos/bg-coach.webp" position="object-top" fade="y" opacity={0.12} />
       <div className="aurora-blob bottom-[-10%] right-[-8%] h-80 w-80 animate-aurora bg-blood/10" />
       <div className="container-x relative z-10">
         <CabecalhoSecao kicker={BENEFITS.kicker} title={BENEFITS.title} />
