@@ -6,15 +6,27 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
     "headers": [
       {
-        "source": "**/*.@(js|css)",
+        "source": "/",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/assets/**",
         "headers": [
           {
             "key": "Cache-Control",
@@ -23,20 +35,11 @@
         ]
       },
       {
-        "source": "**/*.@(webp|jpg|jpeg|png|svg|gif|woff2)",
+        "source": "**/*.@(webp|jpg|jpeg|png|svg|gif|ico|woff2)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=2592000"
-          }
-        ]
-      },
-      {
-        "source": "/index.html",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "public, max-age=86400"
           }
         ]
       }
