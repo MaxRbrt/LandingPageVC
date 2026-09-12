@@ -12,6 +12,8 @@ interface ButtonProps {
   /** abre em nova aba quando href é externo */
   external?: boolean;
   ariaLabel?: string;
+  /** identifica este CTA no relatório de conversão (vira `data-cta`) */
+  dataCta?: string;
 }
 
 const base =
@@ -36,6 +38,7 @@ export default function Botao({
   className = "",
   external,
   ariaLabel,
+  dataCta,
 }: ButtonProps) {
   const cls = `${base} ${variants[variant]} ${className}`;
 
@@ -64,6 +67,7 @@ export default function Botao({
       <a
         href={href}
         aria-label={ariaLabel}
+        data-cta={dataCta}
         className={cls}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
@@ -73,7 +77,7 @@ export default function Botao({
   }
 
   return (
-    <button type="button" onClick={onClick} aria-label={ariaLabel} className={cls}>
+    <button type="button" onClick={onClick} aria-label={ariaLabel} data-cta={dataCta} className={cls}>
       {inner}
     </button>
   );

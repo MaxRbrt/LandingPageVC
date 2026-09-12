@@ -49,7 +49,11 @@ export default function ChamadaFinal() {
 
         <Revelar from="scale" delay={0.2} className="mt-8">
           <EfeitoMagnetico>
-            <BotaoWhatsApp message={FINAL_CTA.whatsappMessage} className="!px-9 !py-4 !text-base">
+            <BotaoWhatsApp
+              message={FINAL_CTA.whatsappMessage}
+              origem="cta final"
+              className="!px-9 !py-4 !text-base"
+            >
               {FINAL_CTA.cta}
             </BotaoWhatsApp>
           </EfeitoMagnetico>

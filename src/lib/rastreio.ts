@@ -6,7 +6,13 @@ import { TRACKING } from "@/dados/conteudo";
  * em TRACKING (conteudo.ts) — sem ID, nada carrega.
  */
 
-type Fbq = ((...args: unknown[]) => void) & { queue?: unknown[]; loaded?: boolean; version?: string };
+type Fbq = ((...args: unknown[]) => void) & {
+  callMethod?: (...args: unknown[]) => void;
+  queue?: unknown[];
+  push?: Fbq;
+  loaded?: boolean;
+  version?: string;
+};
 
 declare global {
   interface Window {
@@ -25,14 +31,31 @@ function injetarScript(src: string) {
 }
 
 function iniciarMetaPixel(id: string) {
-  const fbq: Fbq = function (...args: unknown[]) {
-    // antes do script carregar, as chamadas ficam na fila
-    fbq.queue?.push(args);
+  /*
+   * Stub OFICIAL da Meta. NÃO simplificar.
+   *
+   * O detalhe que importa é o `callMethod ? ... : queue.push`. O fbevents.js
+   * NÃO substitui window.fbq — ele só pendura um `.callMethod` nela e conta
+   * com esse if para despachar os eventos.
+   *
+   * A versão anterior sempre empilhava na fila. Efeito: o PageView funcionava
+   * (a fila é drenada uma vez quando o script carrega) e TODO evento posterior
+   * — inclusive o Contact, que é a conversão do site — ficava preso na fila e
+   * nunca era enviado, sem erro nenhum no console.
+   */
+  const n = function (...args: unknown[]) {
+    // Reflect.apply e não spread: o snippet oficial amarra o `this` ao
+    // próprio fbq (`n.callMethod.apply(n, arguments)`) e o fbevents.js conta
+    // com isso.
+    if (n.callMethod) Reflect.apply(n.callMethod, n, args);
+    else n.queue?.push(args);
   } as Fbq;
-  fbq.queue = [];
-  fbq.version = "2.0";
-  window.fbq = fbq;
-  window._fbq = fbq;
+  n.push = n;
+  n.loaded = true;
+  n.version = "2.0";
+  n.queue = [];
+  window.fbq = n;
+  if (!window._fbq) window._fbq = n;
 
   injetarScript("https://connect.facebook.net/en_US/fbevents.js");
   window.fbq("init", id);
@@ -41,8 +64,15 @@ function iniciarMetaPixel(id: string) {
 
 function iniciarGoogle(ids: string[]) {
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function (...args: unknown[]) {
-    window.dataLayer?.push(args);
+  /*
+   * O gtag.js espera receber o objeto `arguments` cru no dataLayer, não um
+   * array. Por isso o `function` normal com `arguments` em vez de rest
+   * params — `(...args) => dataLayer.push(args)` empurra um Array e o
+   * gtag.js ignora.
+   */
+  window.gtag = function () {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
   };
 
   injetarScript(`https://www.googletagmanager.com/gtag/js?id=${ids[0]}`);
@@ -81,7 +111,13 @@ export function rastrearContatoWhatsApp(origem: string) {
 
 /**
  * Captura todo clique em link do WhatsApp na página, sem precisar
- * instrumentar cada botão. Usa o texto/aria-label do link como origem.
+ * instrumentar cada botão.
+ *
+ * ORDEM DO FALLBACK IMPORTA: `aria-label` vem por ÚLTIMO de propósito.
+ * Todo CTA passa por <BotaoWhatsApp>, que usa o mesmo aria-label
+ * ("Falar no WhatsApp") em todos eles — com o aria-label na frente do texto,
+ * 7 CTAs diferentes reportavam a MESMA origem e era impossível saber qual
+ * seção converte. `data-cta` continua sendo o mais confiável.
  */
 export function observarCliquesWhatsApp() {
   const onClick = (e: MouseEvent) => {
@@ -91,8 +127,8 @@ export function observarCliquesWhatsApp() {
 
     const origem =
       link.getAttribute("data-cta") ||
-      link.getAttribute("aria-label") ||
       link.textContent?.trim().slice(0, 60) ||
+      link.getAttribute("aria-label") ||
       "link WhatsApp";
 
     rastrearContatoWhatsApp(origem);

@@ -1,53 +1,47 @@
-import { useState } from "react";
-import { TbArrowUpRight, TbPhoto } from "react-icons/tb";
+import { TbArrowUpRight, TbArrowsHorizontal } from "react-icons/tb";
 import { SERVICES } from "@/dados/conteudo";
 import CabecalhoSecao from "@/componentes/ui/layout/CabecalhoSecao";
 import Revelar from "@/componentes/ui/animacoes/Revelar";
 import FundoImagem from "@/componentes/ui/midia/FundoImagem";
 import MiniaturaCursor from "@/componentes/ui/midia/MiniaturaCursor";
-import CarrosselMobile from "@/componentes/ui/midia/carrosseis/CarrosselMobile";
+import CarrosselAuto from "@/componentes/ui/midia/carrosseis/CarrosselAuto";
 
 type Servico = (typeof SERVICES.items)[number];
 
 /**
- * Card de serviço no MOBILE: como não há hover, a miniatura aparece ao TOCAR
- * o card (expande suave) e há uma dica visual "toque para ver" deixando claro
- * que é clicável. No desktop a interação continua via MiniaturaCursor (hover).
+ * Card de serviço no MOBILE — foto SEMPRE visível, sem toque.
+ *
+ * A versão anterior escondia a foto atrás de um botão "ver / fechar". Isso
+ * quebrou quando a faixa virou loop infinito, e por um motivo estrutural, não
+ * por um detalhe de CSS: o loop TRIPLICA o conteúdo, então existem 3 cópias de
+ * cada serviço e cada uma guarda o próprio estado de aberto/fechado. Tocar numa
+ * cópia deixava as outras duas fechadas, e o mesmo serviço aparecia com "VER" e
+ * "FECHAR" ao mesmo tempo na tela. Abrir também esticava a faixa em ~120px
+ * (empurrando a página) e a foto deslizava pra fora enquanto o usuário olhava.
+ *
+ * Estado por instância e carrossel em loop automático não convivem. Como a foto
+ * é conteúdo de apoio e não segredo, mostrar direto resolve os três problemas de
+ * uma vez — e ainda é melhor de conversão: numa landing de anúncio, o que exige
+ * toque é o que quase ninguém vê.
+ *
+ * No desktop nada muda: a miniatura continua seguindo o cursor (MiniaturaCursor).
  */
 function ServicoMobile({ s }: { s: Servico }) {
-  const [open, setOpen] = useState(false);
   return (
-    <button
-      type="button"
-      onClick={() => setOpen((o) => !o)}
-      aria-expanded={open}
-      className="group relative flex h-full w-full flex-col bg-ink-700 p-8 text-left transition-colors duration-300 active:bg-ink-600"
-    >
-      <span className="absolute right-5 top-5 inline-flex items-center gap-1 rounded-full border border-blood/40 bg-blood/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-blood">
-        <TbPhoto className="text-xs" /> {open ? "fechar" : "ver"}
-      </span>
-
+    <div className="flex h-full w-full flex-col bg-ink-700 p-7">
       <h3 className="font-display text-2xl uppercase text-cream">{s.tag}</h3>
       <p className="mt-3 text-cream/70">{s.desc}</p>
-
-      {/* Miniatura revelada no toque (animação de altura via grid-rows). */}
-      <div className={`grid transition-all duration-500 ease-out ${open ? "mt-5 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-        <div className="overflow-hidden">
-          <img
-            src={s.thumb}
-            alt={s.tag}
-            loading="lazy"
-            className="aspect-[4/3] w-full rounded-xl border border-ink-500/60 object-cover saturate-0"
-          />
-        </div>
-      </div>
-
-      {!open && (
-        <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-cream/45">
-          <TbArrowUpRight className="text-blood" /> toque para ver
-        </span>
-      )}
-    </button>
+      {/* aria-hidden: a foto ilustra o texto que já está acima, e o loop a
+          repete 3x. Sem isso o leitor de tela anunciaria imagem repetida. */}
+      <img
+        src={s.thumb}
+        alt=""
+        aria-hidden
+        loading="lazy"
+        draggable={false}
+        className="mt-5 aspect-[4/3] w-full rounded-xl border border-ink-500/60 object-cover saturate-0"
+      />
+    </div>
   );
 }
 
@@ -76,20 +70,21 @@ export default function Servicos() {
           </Revelar>
         </div>
 
-        {/* Mobile: card emoldurado com toque p/ revelar a miniatura. */}
-        <CarrosselMobile
-          className="mt-10"
+        {/* Mobile: loop infinito que anda sozinho e pausa enquanto o dedo está na tela. */}
+        <CarrosselAuto
+          className="mt-10 md:hidden"
           cardWidth="82%"
           cardClassName="overflow-hidden rounded-2xl border border-ink-500/60"
+          speed={40}
           hint={false}
         >
           {SERVICES.items.map((s, i) => (
             <ServicoMobile key={i} s={s} />
           ))}
-        </CarrosselMobile>
-        {/* Dica de arraste + toque (só mobile). */}
+        </CarrosselAuto>
+        {/* Dica de arraste (só mobile). */}
         <p className="mt-4 flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.25em] text-cream/40 md:hidden">
-          <TbArrowUpRight className="text-blood" /> arraste e toque nos cards
+          <TbArrowsHorizontal className="text-blood" /> passa sozinho · arraste se quiser
         </p>
 
         {/* Desktop: grid hairline + miniatura no cursor. */}

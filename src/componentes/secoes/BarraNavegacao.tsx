@@ -75,6 +75,7 @@ export default function BarraNavegacao() {
             href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
+            data-cta="nav topo"
             className="hidden items-center gap-2 rounded-full bg-blood px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-white transition-transform hover:scale-105 sm:inline-flex"
           >
             <FaWhatsapp /> Começar
@@ -115,6 +116,7 @@ export default function BarraNavegacao() {
                 href={waLink()}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cta="menu mobile"
                 className="inline-flex items-center gap-2 rounded-full bg-blood px-5 py-3 text-sm font-semibold uppercase text-white"
               >
                 <FaWhatsapp /> Falar no WhatsApp

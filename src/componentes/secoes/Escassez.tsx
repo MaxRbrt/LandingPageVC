@@ -22,7 +22,11 @@ export default function Escassez() {
               </span>
               <p className="mt-4 text-lg text-cream/80">{SCARCITY.text}</p>
             </div>
-            <BotaoWhatsApp message={SCARCITY.ctaMessage} className="shrink-0 !px-8 !py-4">
+            <BotaoWhatsApp
+              message={SCARCITY.ctaMessage}
+              origem="escassez - vagas"
+              className="shrink-0 !px-8 !py-4"
+            >
               Garantir minha vaga
             </BotaoWhatsApp>
           </div>

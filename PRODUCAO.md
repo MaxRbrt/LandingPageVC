@@ -28,10 +28,62 @@ Hospedagem **não** precisa comprar: o Firebase Hosting já é a hospedagem.
 Console do Firebase → Hosting → **Adicionar domínio personalizado** → seguir os registros DNS que ele mostrar.
 SSL é emitido automático e de graça. Propagação leva de minutos a algumas horas.
 
-### 3. Trocar o plano para Blaze
+> Domínio personalizado + SSL **funcionam no plano Spark (grátis)**. Não é
+> preciso subir para o Blaze só por causa do domínio.
+
+### 3. Trocar o plano para Blaze (antes de ligar a campanha)
+
 Console → Configurações → Uso e faturamento → **Blaze (pagamento por uso)**.
 
-Motivo: o plano grátis (Spark) corta em 360 MB de transferência por dia. Com a página em 3,2 MB isso dá ~110 visitas/dia — tráfego pago estoura isso rápido e o site sai do ar até a meia-noite. No Blaze o mesmo volume custa centavos, e dá pra colocar alerta de orçamento.
+**Como o limite do Spark realmente funciona** (doc oficial do Hosting):
+
+> "Data transfer from the CDN to your end users is at no cost up to 10 GB/month."
+>
+> "If you are _not_ on the Blaze plan, and you reach the 10 GB/month limit of
+> no-cost data transfer, we offer a short grace period but then your sites will
+> be disabled. Your sites will remain disabled until the start of the next month."
+>
+> "You can reenable your sites immediately by upgrading to the Blaze plan."
+
+Ou seja: a cota é **mensal (10 GB)**, não diária. Os "360 MB/dia" que aparecem
+na página de preços são a mesma cota dividida por 30 — um pico de um dia não
+derruba nada, mas quando os 10 GB do mês acabam o site fica **fora do ar até o
+dia 1º do mês seguinte**. O único jeito de voltar antes é subir para o Blaze,
+o que religa na hora.
+
+**Transferência real por visita** (medido, cache frio, build de produção, só o
+que o Firebase entrega — o Google Fonts vem de outro domínio e não conta):
+
+| Cenário | Transferência |
+|---|---|
+| Mobile, saiu na primeira dobra | 501 KB |
+| Mobile, rolou a página toda | 1,39 MB |
+| Desktop, rolou tudo | ~2,1 MB |
+
+Média de tráfego pago (maioria mobile): **~0,87 MB por visita**.
+
+> ⚠️ Não use os 3,4 MB do `dist/` para essa conta: é o peso de TODOS os
+> arquivos do build somados, não o que um visitante baixa.
+
+**Quanto tempo os 10 GB duram:**
+
+| Visitas/dia | Consumo/mês | Resultado |
+|---|---|---|
+| 100 | 2,6 GB | 26% da cota |
+| 200 | 5,2 GB | 52% da cota |
+| 390 | 10,2 GB | estoura no fim do mês |
+| 500 | 13 GB | **cai por volta do dia 23** |
+| 1.000 | 26 GB | **cai por volta do dia 12** |
+
+**No Blaze:** os mesmos 10 GB/mês continuam grátis; o excedente sai a
+US$ 0,15/GB. A 1.000 visitas/dia (26 GB/mês) isso dá ~US$ 2,40/mês.
+
+**Alerta de orçamento:** Google Cloud → Billing → Budgets & alerts.
+Atenção: o alerta **avisa, não corta**. Para teto duro de gasto, a alternativa
+é Cloudflare Pages (banda ilimitada, sem cartão).
+
+**Se ficar no Spark:** confira Firebase Console → Hosting → **Uso** toda semana.
+Passou de ~7 GB no mês, sobe para o Blaze antes de bater no teto.
 
 ### 4. Atualizar as URLs do site
 No `index.html`, trocar **todas** as ocorrências de `https://landingpage-1d1b2.firebaseapp.com` pelo domínio final. São 6 lugares: `canonical`, `og:url`, `og:image`, `twitter:image` e 2 dentro do JSON-LD.

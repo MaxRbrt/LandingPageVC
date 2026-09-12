@@ -42,7 +42,11 @@ export default function ComoComecar() {
 
         <Revelar from="scale" delay={0.15} className="mt-12 flex justify-center">
           <EfeitoMagnetico>
-            <BotaoWhatsApp message={HOW_TO_START.whatsappMessage} className="!px-9 !py-4 !text-base">
+            <BotaoWhatsApp
+              message={HOW_TO_START.whatsappMessage}
+              origem="como comecar"
+              className="!px-9 !py-4 !text-base"
+            >
               {HOW_TO_START.cta}
             </BotaoWhatsApp>
           </EfeitoMagnetico>

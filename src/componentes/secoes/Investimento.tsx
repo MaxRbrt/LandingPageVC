@@ -51,7 +51,11 @@ export default function Investimento() {
 
             <div className="mt-10 flex justify-center">
               <EfeitoMagnetico>
-                <BotaoWhatsApp message={PRICING.ctaMessage} className="!px-9 !py-4 !text-base">
+                <BotaoWhatsApp
+                  message={PRICING.ctaMessage}
+                  origem="investimento"
+                  className="!px-9 !py-4 !text-base"
+                >
                   {PRICING.cta}
                 </BotaoWhatsApp>
               </EfeitoMagnetico>

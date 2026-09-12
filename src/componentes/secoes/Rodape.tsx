@@ -31,6 +31,7 @@ export default function Rodape() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
+                data-cta="rodape"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-500 text-lg text-cream/80 transition-colors hover:border-blood hover:text-blood"
               >
                 <FaWhatsapp />

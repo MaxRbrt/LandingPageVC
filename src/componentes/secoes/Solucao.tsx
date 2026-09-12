@@ -16,7 +16,7 @@ export default function Solucao() {
             <p className="mt-6 max-w-xl text-lg text-cream/70">{SOLUTION.intro}</p>
           </Revelar>
           <Revelar from="up" delay={0.2} className="mt-9">
-            <BotaoWhatsApp>Quero começar agora</BotaoWhatsApp>
+            <BotaoWhatsApp origem="solucao">Quero começar agora</BotaoWhatsApp>
           </Revelar>
         </div>
 

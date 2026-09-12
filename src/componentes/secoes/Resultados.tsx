@@ -1,11 +1,48 @@
-import { FaQuoteLeft, FaInstagram } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 import { RESULTS, TESTIMONIALS, ABOUT } from "@/dados/conteudo";
 import CabecalhoSecao from "@/componentes/ui/layout/CabecalhoSecao";
 import Revelar from "@/componentes/ui/animacoes/Revelar";
 import BotaoWhatsApp from "@/componentes/ui/botoes/BotaoWhatsApp";
 import ComparadorAntesDepois from "@/componentes/ui/midia/ComparadorAntesDepois";
+import CarrosselDepoimentos from "@/componentes/ui/midia/carrosseis/CarrosselDepoimentos";
+import CarrosselAuto from "@/componentes/ui/midia/carrosseis/CarrosselAuto";
 
 export default function Resultados() {
+  /* Um card só, usado nos dois lugares: carrossel em loop no mobile e grid
+     no desktop. O desktop continua exatamente como era. */
+  const cardsTransformacao = RESULTS.transformacoes.map((t) => (
+    <figure
+      key={t.src}
+      className="group h-full w-full overflow-hidden rounded-2xl border border-ink-500/60 bg-ink-800"
+    >
+      <header className="flex items-center gap-2.5 px-4 py-3">
+        <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-blood to-blood/60 text-[11px] font-bold text-cream">
+          VC
+        </span>
+        <span className="text-sm font-semibold text-cream">@viniciotreinador</span>
+        <span className="ml-auto flex items-center gap-2.5">
+          {t.metric && (
+            <span className="rounded-full bg-blood/15 px-2.5 py-1 text-xs font-bold text-blood">
+              {t.metric}
+            </span>
+          )}
+          <FaInstagram className="text-lg text-cream/45" />
+        </span>
+      </header>
+      <div className="aspect-[2/3] overflow-hidden bg-ink-900">
+        <img
+          src={t.src}
+          alt={t.caption}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      </div>
+      <figcaption className="px-4 py-3.5 text-sm leading-snug text-cream/75">
+        <span className="font-semibold text-cream/90">@viniciotreinador</span> {t.caption}
+      </figcaption>
+    </figure>
+  ));
+
   return (
     <section id="resultados" className="relative overflow-hidden bg-ink-900 py-14 sm:py-20 md:py-32">
       <div className="aurora-blob left-1/2 top-[-8%] h-80 w-80 -translate-x-1/2 animate-aurora bg-blood/12" />
@@ -93,6 +130,7 @@ export default function Resultados() {
               </div>
               <BotaoWhatsApp
                 className="w-full"
+                origem="resultados - proxima da fila"
                 message="Oi Vinicio! Vi os resultados na página e quero começar minha transformação. Como funciona?"
               >
                 Quero esse resultado
@@ -105,61 +143,29 @@ export default function Resultados() {
           <Revelar from="up">
             <span className="kicker mb-6">Mais transformações reais</span>
           </Revelar>
-          <Revelar stagger className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
-            {RESULTS.transformacoes.map((t) => (
-              <figure
-                key={t.src}
-                className="group overflow-hidden rounded-2xl border border-ink-500/60 bg-ink-800 max-md:w-[85%] max-md:shrink-0 max-md:snap-center"
-              >
-                <header className="flex items-center gap-2.5 px-4 py-3">
-                  <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-blood to-blood/60 text-[11px] font-bold text-cream">
-                    VC
-                  </span>
-                  <span className="text-sm font-semibold text-cream">@viniciotreinador</span>
-                  <span className="ml-auto flex items-center gap-2.5">
-                    {t.metric && (
-                      <span className="rounded-full bg-blood/15 px-2.5 py-1 text-xs font-bold text-blood">
-                        {t.metric}
-                      </span>
-                    )}
-                    <FaInstagram className="text-lg text-cream/45" />
-                  </span>
-                </header>
-                <div className="aspect-[2/3] overflow-hidden bg-ink-900">
-                  <img
-                    src={t.src}
-                    alt={t.caption}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <figcaption className="px-4 py-3.5 text-sm leading-snug text-cream/75">
-                  <span className="font-semibold text-cream/90">@viniciotreinador</span> {t.caption}
-                </figcaption>
-              </figure>
-            ))}
+          {/* Mobile: loop infinito andando sozinho. Desktop: grid como antes. */}
+          <CarrosselAuto className="md:hidden" cardWidth="85%" speed={50} hint={false}>
+            {cardsTransformacao}
+          </CarrosselAuto>
+          <Revelar stagger className="hidden gap-5 md:grid md:grid-cols-2">
+            {cardsTransformacao}
           </Revelar>
         </div>
 
         {TESTIMONIALS.enabled && TESTIMONIALS.items.length > 0 && (
           <div className="mt-16">
             <Revelar from="up">
-              <span className="kicker mb-6">O que dizem</span>
+              <span className="kicker mb-3">O que dizem</span>
             </Revelar>
-            <div className="grid gap-6 md:grid-cols-2">
-              {TESTIMONIALS.items.map((t, i) => (
-                <Revelar key={i} from="up" delay={i * 0.1}>
-                  <figure className="card h-full p-7">
-                    <FaQuoteLeft className="text-2xl text-blood" />
-                    <blockquote className="mt-4 text-lg text-cream/85">{t.quote}</blockquote>
-                    <figcaption className="mt-5 text-sm">
-                      <span className="font-semibold text-cream">{t.name}</span>
-                      <span className="text-cream/60"> · {t.context}</span>
-                    </figcaption>
-                  </figure>
-                </Revelar>
-              ))}
-            </div>
+            <Revelar from="up">
+              <p className="mb-6 max-w-xl text-sm text-cream/55">
+                Mensagens e respostas de formulário de alunos reais, publicadas com
+                autorização.
+              </p>
+            </Revelar>
+            <Revelar from="up">
+              <CarrosselDepoimentos items={TESTIMONIALS.items} />
+            </Revelar>
           </div>
         )}
 

@@ -421,24 +421,112 @@ export const RESULTS = {
    Deixe enabled=false enquanto não houver autorização. */
 export const TESTIMONIALS = {
   enabled: true,
+
+  /* AUTORIZAÇÃO: ✅ concedida pelo cliente em 2026-09-12 para todos os
+   * depoimentos desta lista (conversas de WhatsApp + respostas de formulário).
+   *
+   * >>> PENDÊNCIA ABERTA: NOMES <<<
+   * Só temos dois (Dani e Cynthia). Os demais estão sem `name` e o card
+   * mostra apenas o contexto. Primeiro nome real converte bastante mais que
+   * card anônimo — peça ao Vinicio e preencha. NÃO inventar nome.
+   *
+   * Edição: os textos foram encurtados e tiveram acentos/typos óbvios
+   * corrigidos. A voz foi preservada de propósito — "muitooooo", "kkk" e
+   * "hahaha" são o que fazem parecer real. Não "profissionalizar".
+   *
+   * Ordem = ordem de exibição no carrossel. Os primeiros são os que mais
+   * derrubam objeção (preço, tempo, "eu consigo sozinha").
+   */
   items: [
-    // Transcrito do card publicado pelo próprio Vinicio (@viniciotreinador) — uso autorizado.
-    // CONFIRMAR com o Vinicio antes de publicar e adicionar novos depoimentos aqui.
     {
+      // Resolve as duas maiores objeções de uma vez: falta de tempo e
+      // resultado sem sofrimento. E tem número.
+      context: "Emagrecimento · 9 meses",
+      destaque: "57kg → 50kg",
+      quote:
+        "A consultoria foi a responsável por me trazer uma vida ativa novamente. Estava sedentária e achava que não tinha tempo pra fazer exercícios. Foi com 40 minutos por dia que saí dos 57kg e cheguei aos 50kg de forma natural — e gostando do processo. Foram 9 meses em que aprendi a gostar de academia e a respeitar meu corpo.",
+    },
+    {
+      // A objeção de preço respondida pela própria aluna. Vale ouro na
+      // seção de Investimento.
+      name: "Dani",
+      context: "Sobre o investimento",
+      pergunta: "E está valendo a pena o seu investimento?",
+      quote:
+        "Muitooooo. Eu realmente peguei gosto pela musculação, por ter um acompanhamento de perto e vendo resultados aparecendo.",
+    },
+    {
+      context: "Treino no pós-parto",
+      quote:
+        "Notei o quanto consegui evoluir desde que comecei a treinar com você, lá no pós-parto. No início achei que não fosse conseguir encaixar, principalmente agora que voltei a trabalhar, mas com as alterações que você fez, conseguimos — inclusive pegando cargas que não havia pego nem antes da gravidez kkk. Indico de olhos fechados.",
+    },
+    {
+      // Prova concreta do "suporte real" que a página repete o tempo todo.
+      // Transforma adjetivo em fato verificável.
+      context: "Sobre o acompanhamento",
+      pergunta: "Se você pudesse destacar uma coisa da consultoria, qual seria?",
+      quote:
+        "A sua disponibilidade e a individualidade com que conduz os alunos. Nas últimas 3 semanas aumentei a frequência de envio dos vídeos — enviei o treino gravado todos os dias — e isso não mudou em nada a atenção. Todos os dias os vídeos foram corrigidos (isso mesmo, TODOS).",
+    },
+    {
+      // Resposta direta ao "eu consigo fazer sozinha".
+      context: "Recomendação",
+      destaque: "Nota 10",
+      pergunta: "De 0 a 10, o quanto você indicaria a consultoria?",
+      quote:
+        "10. Eu sou o maior exemplo disso, não só na parte visível mas naquela que muita gente não vê: as mudanças e os hábitos. O dia a dia. Tem muito a ver com você — sozinha jamais teria feito nem metade.",
+    },
+    {
+      // Bate exatamente com a promessa do hero ("plano que cabe na sua rotina").
+      context: "Treino sob medida",
+      pergunta: "Se você pudesse destacar uma coisa da consultoria, qual seria?",
+      quote:
+        "Eu sempre vou enfatizar o quanto prezo pelo seu olhar individual. Todo o cuidado com o dia a dia, com a minha rotina, minha alimentação, meus horários. Não gira em torno só de um treino básico: ele é montado para caber dentro da minha vida.",
+    },
+    {
+      name: "Cynthia",
+      context: "Autoestima",
+      quote:
+        "Meses atrás eu jamais faria um vídeo desse e ainda jogaria em rede social pra incentivar outras mulheres. Há muito tempo eu não sentia isso, de olhar no espelho e gostar do que vejo. E é real. Você me ajudou a despertar uma Cynthia que há muito tempo estava adormecida.",
+    },
+    {
+      // Fala de saúde e disposição — atinge quem não busca estética.
+      context: "Disposição e saúde",
+      pergunta: "Qual evolução você mais percebe em você hoje?",
+      quote:
+        "Mais disposição no dia a dia, mais rapidez de movimento — levantar, sentar, brincar com as crianças, mais força pra levantá-los. E tenho a impressão de que minha ansiedade melhorou: antes eu ficava tentando puxar o ar e parecia que não vinha; hoje não percebo mais tanto essa falta de ar.",
+    },
+    {
+      context: "Constância",
+      quote:
+        "A consultoria tem me ajudado muito a manter uma rotina de exercícios. Gosto de sempre poder contar com o Vinicio para alterar ou adaptar meu plano caso sinta alguma dor, ou caso a rotina mude — isso me ajuda muito a manter a constância. Sempre que preciso, ele responde logo.",
+    },
+    {
+      context: "Mentalidade",
+      quote:
+        "Eu nunca na vida acreditava quando ouvia falar que o treino ajudava a pessoa a se sentir bem, mais feliz. E agora eu também sinto isso hahaha.",
+    },
+    {
+      // Aluna recente: mostra que a experiência já é boa desde o começo,
+      // não só depois de meses.
+      context: "Primeiras semanas",
+      quote:
+        "Estou aprendendo sobre a execução correta dos exercícios e percebendo detalhes em que eu não prestava tanta atenção. Ter alguém acompanhando e corrigindo o jeito certo de fazer faz muita diferença. Estou curtindo muito a experiência.",
+    },
+    {
+      // Transcrito do card publicado pelo próprio Vinicio (@viniciotreinador).
       name: "Vitória",
       context: "Consultoria semestral",
       quote:
         "Hoje recebi um elogio e fiquei muito feliz: disseram que minha cintura está mais fina. Nossa, ganhei meu dia! Pra quem estava se sentindo travada uns anos atrás, isso é tudo.",
     },
-    /* >>> TODO CLIENTE: 4–6 depoimentos convertem muito mais que 1. <<<
-       Peça ao Vinicio prints/áudios reais (com autorização) e cole no formato:
-    {
-      name: "Nome real",
-      context: "Ex.: Emagrecimento • 4 meses",
-      quote: "Frase real do aluno, sem editar demais — quanto mais específico, melhor.",
-    },
-    */
-  ] as { name: string; context: string; quote: string }[],
+  ] as {
+    name?: string;
+    context: string;
+    pergunta?: string;
+    destaque?: string;
+    quote: string;
+  }[],
 };
 
 /* ----------------------- MOTIVAÇÃO ----------------------- */

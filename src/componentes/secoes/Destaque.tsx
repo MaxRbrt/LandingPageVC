@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
 import { TbUsers, TbArrowRight, TbStarFilled } from "react-icons/tb";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
@@ -11,8 +11,29 @@ const FundoParticulas = lazy(() => import("@/componentes/ui/efeitos/FundoParticu
 import BotaoWhatsApp from "@/componentes/ui/botoes/BotaoWhatsApp";
 import EfeitoMagnetico from "@/componentes/ui/efeitos/EfeitoMagnetico";
 
+/**
+ * O backdrop 3D custa 113 KB gzip + um loop WebGL que reposiciona 1.600
+ * partículas a cada frame. Isso é barato num desktop e é peso morto num
+ * celular intermediário — justo o aparelho que recebe o tráfego de anúncio
+ * do Instagram, dentro do navegador interno do app, que já é mais lento.
+ *
+ * A decisão acontece ANTES do render de propósito: assim o chunk do Three.js
+ * nem chega a ser BAIXADO no mobile. Só esconder com CSS não adiantaria — o
+ * arquivo já teria vindo pela rede.
+ *
+ * No desktop nada muda: as partículas continuam exatamente como eram.
+ */
+function devePintarParticulas() {
+  if (typeof window === "undefined") return false;
+  if (prefersReducedMotion()) return false;
+  return window.matchMedia("(min-width: 1024px)").matches;
+}
+
 export default function Destaque() {
   const root = useRef<HTMLDivElement | null>(null);
+  // Lido uma vez no mount. Não reavalia no resize de propósito: trocar de
+  // ideia no meio da sessão só serviria pra baixar 113 KB tarde demais.
+  const [comParticulas] = useState(devePintarParticulas);
 
   // Entrada coreografada dos elementos de apoio (timeline GSAP)
   useEffect(() => {
@@ -47,10 +68,12 @@ export default function Destaque() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/80 to-ink-900/45" />
       </div>
 
-      {/* Backdrop 3D + auroras + vinheta */}
-      <Suspense fallback={null}>
-        <FundoParticulas />
-      </Suspense>
+      {/* Backdrop 3D (só desktop) + auroras + vinheta */}
+      {comParticulas && (
+        <Suspense fallback={null}>
+          <FundoParticulas />
+        </Suspense>
+      )}
       <div className="vignette pointer-events-none absolute inset-0" />
 
       <div className="container-x relative z-10 grid min-h-[100svh] items-center gap-12 pt-24 pb-20 md:grid-cols-[1.15fr_0.85fr]">
@@ -87,7 +110,9 @@ export default function Destaque() {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="hero-cta">
               <EfeitoMagnetico>
-                <BotaoWhatsApp message={HERO.whatsappMessage}>{HERO.ctaPrimary}</BotaoWhatsApp>
+                <BotaoWhatsApp message={HERO.whatsappMessage} origem="hero">
+                  {HERO.ctaPrimary}
+                </BotaoWhatsApp>
               </EfeitoMagnetico>
             </div>
             <a
