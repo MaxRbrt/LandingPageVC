@@ -90,35 +90,38 @@ export default function BarraNavegacao() {
         </div>
       </nav>
 
-      {/* Overlay mobile */}
+      {/* Overlay mobile — grid 0fr→1fr anima até a altura real do conteúdo,
+          sem max-height fixo que cortaria o CTA ao crescer o menu. */}
       <div
-        className={`overflow-hidden bg-ink-900/95 backdrop-blur-md transition-[max-height] duration-300 lg:hidden ${
-          open ? "max-h-96 border-b border-ink-500/60" : "max-h-0"
+        className={`grid bg-ink-900/95 backdrop-blur-md transition-[grid-template-rows] duration-300 lg:hidden ${
+          open ? "grid-rows-[1fr] border-b border-ink-500/60" : "grid-rows-[0fr]"
         }`}
       >
-        <ul className="container-x flex flex-col gap-1 py-4">
-          {NAV_LINKS.map((l) => (
-            <li key={l.href}>
+        <div className="overflow-hidden">
+          <ul className="container-x flex max-h-[calc(100dvh-4rem)] flex-col gap-1 overflow-y-auto py-4">
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-2 text-lg font-medium text-cream/90"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li className="pt-2">
               <a
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block py-2 text-lg font-medium text-cream/90"
+                href={waLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-blood px-5 py-3 text-sm font-semibold uppercase text-white"
               >
-                {l.label}
+                <FaWhatsapp /> Falar no WhatsApp
               </a>
             </li>
-          ))}
-          <li className="pt-2">
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-blood px-5 py-3 text-sm font-semibold uppercase text-white"
-            >
-              <FaWhatsapp /> Falar no WhatsApp
-            </a>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
     </header>
   );

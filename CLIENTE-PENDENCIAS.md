@@ -33,14 +33,15 @@ Cada item diz **onde** mexer em `src/dados/conteudo.ts`.
   - Sim → ajuste o texto pro número real, mantenha `enabled: true`.
   - Não → `enabled: false` (some a faixa). **Nunca usar escassez falsa.**
 
-### 5. Autorização de imagem
-- Confirmar uso autorizado de TODAS as fotos de aluna em `/public/img`.
+### 5. ~~Autorização de imagem~~ ✅
+- **Confirmado pelo cliente (2026-09-11):** uso de TODAS as fotos de aluna em `/public/img` está autorizado.
 
 ### 6. Política de garantia / cancelamento
 - **Onde:** `FINAL_CTA.guarantee` e FAQ "E se não funcionar pra mim?".
 - **Confirmar:** tem fidelidade? Como funciona cancelamento? Ajuste de texto pra bater com a realidade. Nada de prometer o que não cumpre.
 
 ## ✅ Já feito nesta rodada
+- **Antes/depois principal trocado para a Karine** (comparativos frente + perfil, e os dois sliders arrastáveis). Legendas nomeiam a Karine.
 - Seção **Pra quem é / não é** (qualifica o lead).
 - Faixa de **Escassez 1:1** (push pro agora).
 - Seção **Investimento** (preço, com modo "sob consulta" enquanto não há valor).

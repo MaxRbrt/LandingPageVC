@@ -325,12 +325,12 @@ export const RESULTS = {
     {
       src: "/img/antes-depois/01_frente_comparativo.png",
       tag: "Frente",
-      caption: "Mesma aluna, de frente. Antes e depois lado a lado.",
+      caption: "Karine, de frente. Antes e depois lado a lado.",
     },
     {
       src: "/img/antes-depois/04_lado_comparativo.png",
       tag: "Perfil",
-      caption: "Mesma aluna, de perfil. Mudança de cintura e composição.",
+      caption: "Karine, de perfil. Mudança de cintura e composição.",
     },
   ] as { src: string; tag: string; caption: string }[],
   // Mais transformações reais (recortadas dos posts "Resultados Team Campos", uso autorizado).
@@ -357,16 +357,16 @@ export const RESULTS = {
       caption: "Voltou após a pandemia e transformou corpo e mente.",
     },
     {
-      src: "/img/site-acervo/alunas/card-karine.jpg",
-      name: "Karine",
-      context: "Pós-gestação",
-      caption: "Pós-gestação: treino adaptado à rotina intensa de mãe.",
+      src: "/img/site-acervo/alunas/card-juliana.jpg",
+      name: "Juliana",
+      context: "Recomposição corporal",
+      caption: "Cintura e abdômen: mudança de composição com treino e constância.",
     },
     {
-      src: "/img/site-acervo/alunas/card-igor.jpg",
-      name: "Igor",
-      context: "Hipertrofia e recomposição",
-      caption: "Treino full body e constância: corpo mais seco, mais músculo e melhor postura.",
+      src: "/img/site-acervo/alunas/card-marielle.jpg",
+      name: "Marielle",
+      context: "Emagrecimento e definição",
+      caption: "Evolução de perfil: menos gordura, mais definição e postura.",
     },
     {
       src: "/img/site-acervo/alunas/card-vinicio.jpg",
@@ -380,13 +380,13 @@ export const RESULTS = {
       tag: "Frontal",
       before: "/img/antes-depois/02_frente_antes.png",
       after: "/img/antes-depois/03_frente_depois.png",
-      caption: "Aluna acompanhada de perto. Arraste e veja a evolução de frente.",
+      caption: "Karine acompanhada de perto. Arraste e veja a evolução de frente.",
     },
     {
       tag: "Perfil",
       before: "/img/antes-depois/05_lado_antes.png",
       after: "/img/antes-depois/06_lado_depois.png",
-      caption: "Mesma aluna em outro ângulo. Mudança de cintura e postura de perfil.",
+      caption: "Karine em outro ângulo. Mudança de cintura e postura de perfil.",
     },
   ] as { tag?: string; before: string; after: string; caption: string }[],
   methodProof: [
