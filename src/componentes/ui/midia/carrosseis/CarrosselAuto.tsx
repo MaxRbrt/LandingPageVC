@@ -3,11 +3,13 @@ import { TbArrowsHorizontal } from "react-icons/tb";
 import { usarLoopArrasto } from "@/ganchos/usarLoopArrasto";
 
 /**
- * Carrossel de CARDS em loop infinito que ANDA SOZINHO (lateral) e também
- * aceita arraste — pensado p/ mobile das seções numeradas (Benefícios/Método):
- * o usuário não precisa arrastar pra ver os cards, eles passam automático, mas
- * pode interagir. Conteúdo triplicado p/ wrap invisível; engine compartilhada
- * em `usarLoopArrasto`. Em prefers-reduced-motion o auto desliga.
+ * Carrossel de CARDS em loop infinito que anda sozinho e aceita arraste.
+ *
+ * A esteira se move por `transform`, dentro de um pai com `overflow: hidden`.
+ * Não existe contêiner rolável aqui — é o que garante que um swipe pra baixo
+ * em cima do carrossel role a PÁGINA em vez de ficar preso na faixa.
+ * `touch-action: pan-y` formaliza isso: vertical é do navegador, horizontal é
+ * nosso. Conteúdo duplicado (×2) basta, porque a emenda é por módulo.
  */
 export default function CarrosselAuto({
   children,
@@ -30,9 +32,9 @@ export default function CarrosselAuto({
   cardClassName?: string;
 }) {
   const items = Children.toArray(children);
-  const loop = [...items, ...items, ...items];
+  const loop = [...items, ...items];
   const ref = useRef<HTMLUListElement | null>(null);
-  usarLoopArrasto(ref, { speed, reverse });
+  usarLoopArrasto(ref, { speed, reverse, itens: items.length });
 
   return (
     <div className={`relative ${className}`}>
@@ -40,21 +42,27 @@ export default function CarrosselAuto({
       <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 bg-gradient-to-r from-ink-900 to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 bg-gradient-to-l from-ink-900 to-transparent" />
 
-      <ul
-        ref={ref}
-        className="no-scrollbar flex cursor-grab touch-pan-x items-stretch gap-4 overflow-x-auto py-1 [&.is-grabbing]:cursor-grabbing [&.is-grabbing]:select-none"
-      >
-        {loop.map((child, i) => (
-          <li
-            key={i}
-            aria-hidden={i >= items.length}
-            className={`flex shrink-0 ${cardClassName}`}
-            style={{ width: cardWidth }}
-          >
-            <div className="flex w-full">{child}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="overflow-hidden py-1 [touch-action:pan-y]">
+        <ul
+          ref={ref}
+          /* SEM w-max de propósito: a <ul> precisa ter a largura do contêiner
+             visível para que `cardWidth` em % (ex.: "82%") resolva contra a
+             TELA e não contra a própria esteira. Os <li> são shrink-0 e
+             transbordam; quem corta é o overflow-hidden do pai. */
+          className="flex cursor-grab items-stretch gap-4 will-change-transform [&.is-grabbing]:cursor-grabbing [&.is-grabbing]:select-none"
+        >
+          {loop.map((child, i) => (
+            <li
+              key={i}
+              aria-hidden={i >= items.length}
+              className={`flex shrink-0 ${cardClassName}`}
+              style={{ width: cardWidth }}
+            >
+              <div className="flex w-full">{child}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {hint && (
         <p className="mt-4 flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.25em] text-cream/40">

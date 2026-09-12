@@ -19,14 +19,15 @@ interface Props {
 }
 
 /**
- * Faixa de fotos em LOOP INFINITO (conteúdo ×3 + wrap invisível): arrasta no
- * toque e no mouse, anda sozinha devagar e pausa no hover/arraste. Engine em
- * `usarLoopArrasto`. Em prefers-reduced-motion o auto desliga (segue arrastável).
+ * Faixa de fotos em LOOP INFINITO: anda sozinha, arrasta no mouse e no toque,
+ * pausa enquanto o usuário interage. Engine em `usarLoopArrasto` (transform,
+ * não scrollLeft — ver o comentário lá sobre por quê). Em
+ * prefers-reduced-motion o auto desliga e segue arrastável.
  */
 export default function CarrosselFotos({ items, label = "Resultado", speed = 55, reverse = false }: Props) {
-  const loop = [...items, ...items, ...items];
+  const loop = [...items, ...items];
   const scrollerRef = useRef<HTMLDivElement | null>(null);
-  usarLoopArrasto(scrollerRef, { speed, reverse });
+  usarLoopArrasto(scrollerRef, { speed, reverse, itens: items.length });
 
   return (
     <div className="group/track relative">
@@ -34,10 +35,11 @@ export default function CarrosselFotos({ items, label = "Resultado", speed = 55,
       <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-ink-900 to-transparent sm:w-32" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-ink-900 to-transparent sm:w-32" />
 
-      <div
-        ref={scrollerRef}
-        className="no-scrollbar flex w-full cursor-grab touch-pan-x items-center gap-6 overflow-x-auto overflow-y-hidden py-8 [&.is-grabbing]:cursor-grabbing [&.is-grabbing]:select-none"
-      >
+      <div className="overflow-hidden py-8 [touch-action:pan-y]">
+        <div
+          ref={scrollerRef}
+          className="flex cursor-grab items-center gap-6 will-change-transform [&.is-grabbing]:cursor-grabbing [&.is-grabbing]:select-none"
+        >
         {loop.map((g, i) => {
           const idx = i % items.length;
           const n = idx + 1;
@@ -82,11 +84,12 @@ export default function CarrosselFotos({ items, label = "Resultado", speed = 55,
             </figure>
           );
         })}
+        </div>
       </div>
 
       {/* dica de interação */}
       <p className="mt-2 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-cream/40">
-        <TbArrowsHorizontal className="text-blood" /> Arraste para explorar
+        <TbArrowsHorizontal className="text-blood" /> passa sozinho · arraste se quiser
       </p>
     </div>
   );
